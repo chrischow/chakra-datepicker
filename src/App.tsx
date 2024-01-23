@@ -2,7 +2,7 @@ import { Box, Button, ChakraProvider, HStack, Heading, Text, VStack } from '@cha
 import { useEffect, useState } from 'react'
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi'
 import { IoCalendarNumberOutline } from 'react-icons/io5'
-import DatePicker from './components/DatePicker'
+import SingleDatePicker from './components/SingleDatePicker'
 
 function App() {
   const [date, setDate] = useState<Date | null>(new Date())
@@ -18,7 +18,7 @@ function App() {
       <Box p={16} height="100vh" width="700px">
         <VStack alignItems="start">
           <Heading size="lg">Default DatePicker</Heading>
-          <DatePicker onChange={setDate} />
+          <SingleDatePicker onChange={setDate} />
         </VStack>
 
         <VStack mt={8} alignItems="start">
@@ -39,13 +39,13 @@ function App() {
               Reset
             </Button>
           </HStack>
-          <DatePicker value={date1} onChange={setDate1} />
+          <SingleDatePicker value={date1} onChange={setDate1} />
         </VStack>
 
         <VStack mt={8} alignItems="start">
           <Heading size="lg">Custom size and colour</Heading>
           <Text>Larger input box, larger calendar buttons</Text>
-          <DatePicker
+          <SingleDatePicker
             colorScheme="teal"
             onChange={setDate}
             inputProps={{ size: 'lg' }}
@@ -56,7 +56,7 @@ function App() {
 
         <VStack mt={8} alignItems="start">
           <Heading size="lg">Custom icons</Heading>
-          <DatePicker
+          <SingleDatePicker
             inputButtonProps={{ icon: <IoCalendarNumberOutline />, 'aria-label': 'Open Calendar' }}
             onChange={setDate}
             navBackButtonProps={{ icon: <BiSolidLeftArrow />, variant: 'outline' }}
@@ -68,12 +68,12 @@ function App() {
         <VStack mt={8} alignItems="start">
           <Heading size="lg">Customised popover</Heading>
           <Text>Examples: massive arrow, prevent closing on blur, placement top.</Text>
-          <DatePicker onChange={setDate} popoverProps={{ arrowSize: 24, closeOnBlur: false, placement: 'top' }} />
+          <SingleDatePicker onChange={setDate} popoverProps={{ arrowSize: 24, closeOnBlur: false, placement: 'top' }} />
         </VStack>
         <VStack mt={8} alignItems="start">
           <Heading size="lg">Customise everything</Heading>
           <Text>Mainly colour.</Text>
-          <DatePicker
+          <SingleDatePicker
             onChange={setDate}
             colorScheme="pink"
             popoverTitle="lololololol this is bad"

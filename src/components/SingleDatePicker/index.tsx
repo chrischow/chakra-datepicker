@@ -35,7 +35,7 @@ export interface DatePickerProps {
   footerGoToButtonProps?: ButtonProps
 }
 
-const DatePicker = ({
+const SingleDatePicker = ({
   onChange,
   value,
   colorScheme = DEFAULT_COLOR_SCHEME,
@@ -81,4 +81,4 @@ const DatePicker = ({
   )
 }
 
-export default DatePicker
+export default SingleDatePicker
