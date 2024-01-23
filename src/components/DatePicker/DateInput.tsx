@@ -11,13 +11,12 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
-  Portal
+  Portal,
 } from '@chakra-ui/react'
 import { FormEvent } from 'react'
 import CalendarView from './CalendarView'
 import { useDatePicker } from './DatePickerContext'
 import Footer from './Footer'
-import { isValidDate } from './utils'
 
 const DateInput = () => {
   const {
@@ -37,7 +36,7 @@ const DateInput = () => {
       popoverBodyProps,
     },
     popoverDisclosure,
-    validYears,
+    isValidDate,
   } = useDatePicker()
 
   const handleSelectedDate = (event: FormEvent<HTMLInputElement>) => {
@@ -55,7 +54,7 @@ const DateInput = () => {
         focusBorderColor={`${colorScheme}.500`}
         placeholder="dd/mm/yyyy"
         {...inputProps}
-        isInvalid={!isValidDate(selectedDateString, validYears.start, validYears.end)}
+        isInvalid={!isValidDate(selectedDateString)}
         value={selectedDateString}
         onChange={handleSelectedDate}
       />

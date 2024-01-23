@@ -1,6 +1,6 @@
 import { format, parse } from 'date-fns'
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react'
-import { getDatesInMonth, isValidDate } from './utils'
+import { getDatesInMonth, isValidDateInRange } from './utils'
 import { enGB } from 'date-fns/locale'
 import {
   ButtonProps,
@@ -31,6 +31,8 @@ export interface DatePickerContextProps {
   getDatesInMonth: (date: Date) => Date[]
   resetToToday: () => void
   resetView: () => void
+  validYears: { start: number; end: number }
+  isValidDate: (dateString: string) => boolean
   colorScheme?: string & {}
   inputProps?: InputProps
   inputButtonProps?: Partial<IconButtonProps>
@@ -54,7 +56,6 @@ export interface DatePickerContextProps {
     footerGoToButtonProps?: ButtonProps
   }
   popoverDisclosure: UseDisclosureReturn
-  validYears: { start: number; end: number }
 }
 
 const starterDate = new Date()
@@ -72,6 +73,8 @@ const DatePickerContext = createContext<DatePickerContextProps>({
   getDatesInMonth,
   resetToToday: () => {},
   resetView: () => {},
+  validYears: { start: 1900, end: 2100 },
+  isValidDate: () => true,
   colorScheme: DEFAULT_COLOR_SCHEME,
   inputProps: {},
   inputButtonProps: {},
@@ -87,15 +90,14 @@ const DatePickerContext = createContext<DatePickerContextProps>({
     getButtonProps: () => {},
     getDisclosureProps: () => {},
   },
-  validYears: { start: 1900, end: 2100 },
 })
 
 export interface DatePickerProviderProps {
   children: ReactNode
   onChange: (date: Date | null) => void
   value?: Date | null
-  colorScheme?: string & {}
   validYears: { start: number; end: number }
+  colorScheme?: string & {}
   inputProps?: InputProps
   inputButtonProps?: Partial<IconButtonProps>
   popoverProps: {
@@ -144,7 +146,7 @@ export const DatePickerProvider = ({
   const isSelfManaged = value !== undefined
 
   useEffect(() => {
-    if (isValidDate(selectedDateString, validYears.start, validYears.end)) {
+    if (isValidDateInRange(selectedDateString, validYears.start, validYears.end)) {
       const date = parse(selectedDateString, 'P', new Date(), { locale: enGB })
       date.setHours(0, 0, 0, 0)
       setSelectedDate(date)
@@ -180,6 +182,10 @@ export const DatePickerProvider = ({
     setCalendarView('day')
   }
 
+  const isValidDate = (dateString: string) => {
+    return isValidDateInRange(dateString, validYears.start, validYears.end)
+  }
+
   return (
     <DatePickerContext.Provider
       value={{
@@ -194,6 +200,8 @@ export const DatePickerProvider = ({
         getDatesInMonth,
         resetToToday,
         resetView,
+        validYears,
+        isValidDate,
         colorScheme,
         inputProps,
         inputButtonProps,
@@ -201,7 +209,6 @@ export const DatePickerProvider = ({
         navProps,
         calendarProps,
         popoverDisclosure,
-        validYears,
       }}
     >
       {children}

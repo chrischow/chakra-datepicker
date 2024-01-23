@@ -18,7 +18,7 @@ export const getDatesInMonth = (date: Date) => {
   return dates
 }
 
-export const isValidDate = (dateString: string, start: number, end: number) => {
+export const isValidDateInRange = (dateString: string, start: number, end: number) => {
   const parsedDate = parse(dateString, 'P', new Date(), { locale: enGB })
   const year = parsedDate.getFullYear()
   if (year < start || year > end) {

@@ -4,7 +4,6 @@ import { ReactElement } from 'react'
 import { useDatePicker } from '../DatePickerContext'
 import Navigator from '../Navigator'
 import { days, monthLookup } from '../constants'
-import { isValidDate } from '../utils'
 
 const DayCalendar = () => {
   const {
@@ -18,7 +17,7 @@ const DayCalendar = () => {
     colorScheme,
     navProps: { navCenterButtonProps },
     calendarProps: { calendarButtonProps },
-    validYears,
+    isValidDate,
   } = useDatePicker()
 
   // Functions for navigator action buttons
@@ -49,8 +48,7 @@ const DayCalendar = () => {
   let firstRow = true
   for (const date of dates) {
     const day = date.getDay()
-    const isSelected =
-      selectedDate && isValidDate(selectedDateString, validYears.start, validYears.end) && date.getTime() === selectedDate.getTime()
+    const isSelected = selectedDate && isValidDate(selectedDateString) && date.getTime() === selectedDate.getTime()
 
     if (firstRow && day >= 0) {
       for (let i = 0; i < day; i++) {
