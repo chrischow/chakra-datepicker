@@ -1,9 +1,8 @@
+import { CalendarIcon } from '@chakra-ui/icons'
 import {
   IconButton,
-  IconButtonProps,
   Input,
   InputGroup,
-  InputProps,
   InputRightElement,
   Popover,
   PopoverArrow,
@@ -12,26 +11,22 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
-  Portal,
+  Portal
 } from '@chakra-ui/react'
 import { FormEvent } from 'react'
 import CalendarView from './CalendarView'
 import { useDatePicker } from './DatePickerContext'
 import Footer from './Footer'
-import { CalendarIcon } from '@chakra-ui/icons'
 import { isValidDate } from './utils'
 
-export interface DateInputProps {
-  inputProps?: InputProps
-  inputButtonProps?: Partial<IconButtonProps>
-}
-
-const DateInput = ({ inputProps, inputButtonProps }: DateInputProps) => {
+const DateInput = () => {
   const {
     selectedDateString,
     setSelectedDateString,
     resetView,
     colorScheme,
+    inputProps,
+    inputButtonProps,
     popoverProps: {
       popoverTitle,
       popoverProps,
@@ -58,7 +53,7 @@ const DateInput = ({ inputProps, inputButtonProps }: DateInputProps) => {
     <InputGroup>
       <Input
         focusBorderColor={`${colorScheme}.500`}
-        placeholder='dd/mm/yyyy'
+        placeholder="dd/mm/yyyy"
         {...inputProps}
         isInvalid={!isValidDate(selectedDateString, validYears.start, validYears.end)}
         value={selectedDateString}

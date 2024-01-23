@@ -62,6 +62,8 @@ const DatePicker = ({
       value={value}
       colorScheme={colorScheme}
       validYears={validYears}
+      inputProps={inputProps}
+      inputButtonProps={inputButtonProps}
       popoverProps={{
         popoverTitle,
         popoverProps,
@@ -74,7 +76,7 @@ const DatePicker = ({
       navProps={{ navBackButtonProps, navForwardButtonProps, navCenterButtonProps }}
       calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
     >
-      <DateInput inputProps={inputProps} inputButtonProps={inputButtonProps} />
+      <DateInput  />
     </DatePickerProvider>
   )
 }

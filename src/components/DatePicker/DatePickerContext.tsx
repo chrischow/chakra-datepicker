@@ -5,6 +5,7 @@ import { enGB } from 'date-fns/locale'
 import {
   ButtonProps,
   IconButtonProps,
+  InputProps,
   PopoverArrowProps,
   PopoverBodyProps,
   PopoverCloseButtonProps,
@@ -31,6 +32,8 @@ export interface DatePickerContextProps {
   resetToToday: () => void
   resetView: () => void
   colorScheme?: string & {}
+  inputProps?: InputProps
+  inputButtonProps?: Partial<IconButtonProps>
   popoverProps: {
     popoverTitle?: string
     popoverProps?: PopoverProps
@@ -70,6 +73,8 @@ const DatePickerContext = createContext<DatePickerContextProps>({
   resetToToday: () => {},
   resetView: () => {},
   colorScheme: DEFAULT_COLOR_SCHEME,
+  inputProps: {},
+  inputButtonProps: {},
   popoverProps: {},
   navProps: {},
   calendarProps: {},
@@ -91,6 +96,8 @@ export interface DatePickerProviderProps {
   value?: Date | null
   colorScheme?: string & {}
   validYears: { start: number; end: number }
+  inputProps?: InputProps
+  inputButtonProps?: Partial<IconButtonProps>
   popoverProps: {
     popoverTitle?: string
     popoverProps?: PopoverProps
@@ -118,6 +125,8 @@ export const DatePickerProvider = ({
   onChange,
   colorScheme,
   validYears,
+  inputProps = {},
+  inputButtonProps = {},
   navProps = {},
   calendarProps = {},
   popoverProps = {},
@@ -186,6 +195,8 @@ export const DatePickerProvider = ({
         resetToToday,
         resetView,
         colorScheme,
+        inputProps,
+        inputButtonProps,
         popoverProps,
         navProps,
         calendarProps,
