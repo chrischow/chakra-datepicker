@@ -1,6 +1,6 @@
 import { format, parse } from 'date-fns'
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react'
-import { getDatesInMonth, isValidDateInRange } from './utils'
+import { getDatesInMonth, isValidDateInRange } from '../../common/utils'
 import { enGB } from 'date-fns/locale'
 import {
   ButtonProps,
@@ -15,7 +15,7 @@ import {
   UseDisclosureReturn,
   useDisclosure,
 } from '@chakra-ui/react'
-import { DEFAULT_COLOR_SCHEME } from './constants'
+import { DEFAULT_COLOR_SCHEME } from '../../common/constants'
 
 export type CalendarView = 'day' | 'month' | 'year'
 

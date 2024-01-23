@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import { ReactElement } from 'react'
 import { useDatePicker } from '../DatePickerContext'
 import Navigator from '../Navigator'
-import { days, monthLookup } from '../constants'
+import { days, monthLookup } from '../../../common/constants'
 
 const DayCalendar = () => {
   const {

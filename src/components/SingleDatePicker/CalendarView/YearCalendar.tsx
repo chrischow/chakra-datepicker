@@ -2,7 +2,7 @@ import { Button, SimpleGrid, Spacer, VStack } from '@chakra-ui/react'
 import { ReactElement } from 'react'
 import { useDatePicker } from '../DatePickerContext'
 import Navigator from '../Navigator'
-import { getCurrentScore } from '../utils'
+import { getCurrentScore } from '../../../common/utils'
 
 const YearCalendar = () => {
   const {

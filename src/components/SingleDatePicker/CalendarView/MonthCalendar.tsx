@@ -2,7 +2,7 @@ import { Button, SimpleGrid, VStack } from '@chakra-ui/react'
 import { ReactElement } from 'react'
 import { useDatePicker } from '../DatePickerContext'
 import Navigator from '../Navigator'
-import { shortMonths } from '../constants'
+import { shortMonths } from '../../../common/constants'
 
 const MonthCalendar = () => {
   const {

@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import DateInput from './DateInput'
 import { DatePickerProvider } from './DatePickerContext'
-import { DEFAULT_COLOR_SCHEME, DEFAULT_POPOVER_TITLE, DEFAULT_VALID_YEARS } from './constants'
+import { DEFAULT_COLOR_SCHEME, DEFAULT_POPOVER_TITLE, DEFAULT_VALID_YEARS } from '../../common/constants'
 
 export interface DatePickerProps {
   onChange: (date: Date | null) => void
