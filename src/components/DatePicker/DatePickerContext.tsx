@@ -19,20 +19,7 @@ import { DEFAULT_COLOR_SCHEME } from './constants'
 
 export type CalendarView = 'day' | 'month' | 'year'
 
-export interface DatePickerContextProps {
-  calendarView: CalendarView
-  setCalendarView: Dispatch<SetStateAction<CalendarView>>
-  selectedDate: Date | null
-  setSelectedDate: Dispatch<SetStateAction<Date | null>>
-  selectedDateString: string
-  setSelectedDateString: Dispatch<SetStateAction<string>>
-  displayDate: Date
-  setDisplayDate: Dispatch<SetStateAction<Date>>
-  getDatesInMonth: (date: Date) => Date[]
-  resetToToday: () => void
-  resetView: () => void
-  validYears: { start: number; end: number }
-  isValidDate: (dateString: string) => boolean
+interface CustomisationProps {
   colorScheme?: string & {}
   inputProps?: InputProps
   inputButtonProps?: Partial<IconButtonProps>
@@ -55,6 +42,22 @@ export interface DatePickerContextProps {
     footerTodayButtonProps?: ButtonProps
     footerGoToButtonProps?: ButtonProps
   }
+}
+
+export interface DatePickerContextProps extends CustomisationProps {
+  calendarView: CalendarView
+  setCalendarView: Dispatch<SetStateAction<CalendarView>>
+  selectedDate: Date | null
+  setSelectedDate: Dispatch<SetStateAction<Date | null>>
+  selectedDateString: string
+  setSelectedDateString: Dispatch<SetStateAction<string>>
+  displayDate: Date
+  setDisplayDate: Dispatch<SetStateAction<Date>>
+  getDatesInMonth: (date: Date) => Date[]
+  resetToToday: () => void
+  resetView: () => void
+  validYears: { start: number; end: number }
+  isValidDate: (dateString: string) => boolean
   popoverDisclosure: UseDisclosureReturn
 }
 
@@ -92,33 +95,11 @@ const DatePickerContext = createContext<DatePickerContextProps>({
   },
 })
 
-export interface DatePickerProviderProps {
+export interface DatePickerProviderProps extends CustomisationProps {
   children: ReactNode
   onChange: (date: Date | null) => void
   value?: Date | null
   validYears: { start: number; end: number }
-  colorScheme?: string & {}
-  inputProps?: InputProps
-  inputButtonProps?: Partial<IconButtonProps>
-  popoverProps: {
-    popoverTitle?: string
-    popoverProps?: PopoverProps
-    popoverHeaderProps?: PopoverHeaderProps
-    popoverCloseButtonProps?: PopoverCloseButtonProps
-    popoverContentProps?: PopoverContentProps
-    popoverArrowProps?: PopoverArrowProps
-    popoverBodyProps?: PopoverBodyProps
-  }
-  navProps: {
-    navBackButtonProps?: Partial<IconButtonProps>
-    navForwardButtonProps?: Partial<IconButtonProps>
-    navCenterButtonProps?: ButtonProps
-  }
-  calendarProps: {
-    calendarButtonProps?: ButtonProps
-    footerTodayButtonProps?: ButtonProps
-    footerGoToButtonProps?: ButtonProps
-  }
 }
 
 export const DatePickerProvider = ({
