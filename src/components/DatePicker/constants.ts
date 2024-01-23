@@ -1,17 +1,17 @@
 export const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const shortMonths = [
-  {shortName: 'Jan', number: 0},
-  {shortName: 'Feb', number: 1},
-  {shortName: 'Mar', number: 2},
-  {shortName: 'Apr', number: 3},
-  {shortName: 'May', number: 4},
-  {shortName: 'Jun', number: 5},
-  {shortName: 'Jul', number: 6},
-  {shortName: 'Aug', number: 7},
-  {shortName: 'Sep', number: 8},
-  {shortName: 'Oct', number: 9},
-  {shortName: 'Nov', number: 10},
-  {shortName: 'Dec', number: 11},
+  { shortName: 'Jan', number: 0 },
+  { shortName: 'Feb', number: 1 },
+  { shortName: 'Mar', number: 2 },
+  { shortName: 'Apr', number: 3 },
+  { shortName: 'May', number: 4 },
+  { shortName: 'Jun', number: 5 },
+  { shortName: 'Jul', number: 6 },
+  { shortName: 'Aug', number: 7 },
+  { shortName: 'Sep', number: 8 },
+  { shortName: 'Oct', number: 9 },
+  { shortName: 'Nov', number: 10 },
+  { shortName: 'Dec', number: 11 },
 ]
 
 export const monthLookup = {
