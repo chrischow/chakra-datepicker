@@ -6,9 +6,11 @@ import { shortMonths } from '../constants'
 
 const MonthCalendar = () => {
   const {
+    selectedDate,
     displayDate,
     setDisplayDate,
     setCalendarView,
+    colorScheme,
     navProps: { navCenterButtonProps },
     calendarProps: { calendarButtonProps },
   } = useDatePicker()
@@ -32,12 +34,14 @@ const MonthCalendar = () => {
 
   // Month calendar logic
   const monthButtons: ReactElement[] = []
-  for (const month of shortMonths) {
+  for (const [idx, month] of shortMonths.entries()) {
+    const isSelected = selectedDate && selectedDate.getMonth() === idx
     monthButtons.push(
       <Button
         key={month.shortName}
         size="sm"
-        variant="ghost"
+        colorScheme={isSelected ? colorScheme : undefined}
+        variant={isSelected ? 'solid': "ghost"}
         {...calendarButtonProps}
         onClick={() => {
           const newDisplayDate = new Date(currentDisplayYear, month.number, 1)

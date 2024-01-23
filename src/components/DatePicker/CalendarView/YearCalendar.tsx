@@ -6,9 +6,11 @@ import { getCurrentScore } from '../utils'
 
 const YearCalendar = () => {
   const {
+    selectedDate,
     displayDate,
     setDisplayDate,
     setCalendarView,
+    colorScheme,
     calendarProps: { calendarButtonProps },
     validYears,
   } = useDatePicker()
@@ -40,10 +42,12 @@ const YearCalendar = () => {
   // Day calendar logic
   const yearButtons: ReactElement[] = []
   for (let i = currentScore.start; i <= currentScore.end; i++) {
+    const isSelected = selectedDate && selectedDate.getFullYear() === i
     yearButtons.push(
       <Button
-        variant="ghost"
         size="sm"
+        colorScheme={isSelected ? colorScheme : undefined}
+        variant={isSelected ? 'solid' : 'ghost'}
         {...calendarButtonProps}
         key={`year-${i}`}
         onClick={() => {
