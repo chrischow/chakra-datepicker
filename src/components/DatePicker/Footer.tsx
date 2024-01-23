@@ -22,7 +22,9 @@ const Footer = () => {
         colorScheme={colorScheme}
         {...footerGoToButtonProps}
         onClick={() => {
-          setDisplayDate(selectedDate)
+          if (selectedDate) {
+            setDisplayDate(selectedDate)
+          }
           setCalendarView('day')
         }}
       >
