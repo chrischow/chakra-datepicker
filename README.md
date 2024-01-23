@@ -1,5 +1,5 @@
 # Chakra Datepicker
-A highly-customisable datepicker built in Chakra UI.
+A highly-customisable datepicker built with Chakra UI.
 
 ## Motivation
 I couldn't find a good, free, pure Chakra UI datepicker that was flexible enough to let me input dates by hand and by clicking/tapping.
@@ -54,3 +54,9 @@ If you pass a `value` to the component, changes are 2-way:
 - Changes in the component are also propagated to your external state
 
 You may also opt to *not* pass a `value` to the component, in which case changes are propagated 1-way only, from the component to your external state.
+
+## Future Work
+Currently, there is only a single datepicker. Other components:
+
+- Date-*time* picker
+- Date-*range* picker
