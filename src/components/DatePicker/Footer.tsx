@@ -1,12 +1,13 @@
 import { Button, VStack } from '@chakra-ui/react'
 import { useDatePicker } from './DatePickerContext'
 
-const Footer = ({ colorScheme }: { colorScheme: string & {} }) => {
+const Footer = () => {
   const {
     resetToToday,
     selectedDate,
     setDisplayDate,
     setCalendarView,
+    colorScheme,
     calendarProps: { footerTodayButtonProps, footerGoToButtonProps },
   } = useDatePicker()
 

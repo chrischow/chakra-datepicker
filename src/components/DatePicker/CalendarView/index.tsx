@@ -3,15 +3,11 @@ import DayCalendar from './DayCalendar'
 import MonthCalendar from './MonthCalendar'
 import YearCalendar from './YearCalendar'
 
-export interface CalendarViewProps {
-  colorScheme: string & {}
-}
-
-const CalendarView = ({ colorScheme }: CalendarViewProps) => {
+const CalendarView = () => {
   const { calendarView } = useDatePicker()
   return (
     <>
-      {calendarView === 'day' && <DayCalendar colorScheme={colorScheme} />}
+      {calendarView === 'day' && <DayCalendar />}
       {calendarView === 'month' && <MonthCalendar />}
       {calendarView === 'year' && <YearCalendar />}
     </>

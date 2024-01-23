@@ -6,11 +6,7 @@ import Navigator from '../Navigator'
 import { days, monthLookup } from '../constants'
 import { isValidDate } from '../utils'
 
-export interface DayCalendarProps {
-  colorScheme: string & {}
-}
-
-const DayCalendar = ({ colorScheme }: DayCalendarProps) => {
+const DayCalendar = () => {
   const {
     selectedDate,
     selectedDateString,
@@ -19,6 +15,7 @@ const DayCalendar = ({ colorScheme }: DayCalendarProps) => {
     setDisplayDate,
     getDatesInMonth,
     setCalendarView,
+    colorScheme,
     navProps: { navCenterButtonProps },
     calendarProps: { calendarButtonProps },
     validYears,

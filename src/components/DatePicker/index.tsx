@@ -11,11 +11,11 @@ import {
 } from '@chakra-ui/react'
 import DateInput from './DateInput'
 import { DatePickerProvider } from './DatePickerContext'
-import { DEFAULT_POPOVER_TITLE } from './constants'
+import { DEFAULT_COLOR_SCHEME, DEFAULT_POPOVER_TITLE, DEFAULT_VALID_YEARS } from './constants'
 
 export interface DatePickerProps {
-  onChange: (date: Date|null) => void
-  value?: Date|null
+  onChange: (date: Date | null) => void
+  value?: Date | null
   colorScheme?: string & {}
   validYears?: { start: number; end: number }
   inputProps?: InputProps
@@ -38,8 +38,8 @@ export interface DatePickerProps {
 const DatePicker = ({
   onChange,
   value,
-  colorScheme,
-  validYears = { start: 1900, end: 2100 },
+  colorScheme = DEFAULT_COLOR_SCHEME,
+  validYears = DEFAULT_VALID_YEARS,
   inputProps,
   inputButtonProps,
   popoverTitle = DEFAULT_POPOVER_TITLE,
@@ -58,8 +58,9 @@ const DatePicker = ({
 }: DatePickerProps) => {
   return (
     <DatePickerProvider
-      value={value}
       onChange={onChange}
+      value={value}
+      colorScheme={colorScheme}
       validYears={validYears}
       popoverProps={{
         popoverTitle,
@@ -73,7 +74,7 @@ const DatePicker = ({
       navProps={{ navBackButtonProps, navForwardButtonProps, navCenterButtonProps }}
       calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
     >
-      <DateInput colorScheme={colorScheme ?? 'purple'} inputProps={inputProps} inputButtonProps={inputButtonProps} />
+      <DateInput inputProps={inputProps} inputButtonProps={inputButtonProps} />
     </DatePickerProvider>
   )
 }

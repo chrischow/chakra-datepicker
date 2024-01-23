@@ -22,16 +22,16 @@ import { CalendarIcon } from '@chakra-ui/icons'
 import { isValidDate } from './utils'
 
 export interface DateInputProps {
-  colorScheme: string & {}
   inputProps?: InputProps
   inputButtonProps?: Partial<IconButtonProps>
 }
 
-const DateInput = ({ colorScheme, inputProps, inputButtonProps }: DateInputProps) => {
+const DateInput = ({ inputProps, inputButtonProps }: DateInputProps) => {
   const {
     selectedDateString,
     setSelectedDateString,
     resetView,
+    colorScheme,
     popoverProps: {
       popoverTitle,
       popoverProps,
@@ -82,8 +82,8 @@ const DateInput = ({ colorScheme, inputProps, inputButtonProps }: DateInputProps
               <PopoverCloseButton {...popoverCloseButtonProps} />
               <PopoverHeader {...popoverHeaderProps}>{popoverTitle}</PopoverHeader>
               <PopoverBody {...popoverBodyProps}>
-                <CalendarView colorScheme={colorScheme} />
-                <Footer colorScheme={colorScheme} />
+                <CalendarView />
+                <Footer />
               </PopoverBody>
             </PopoverContent>
           </Portal>

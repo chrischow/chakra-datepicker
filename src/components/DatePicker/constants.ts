@@ -66,3 +66,5 @@ export const monthLookup = {
 }
 
 export const DEFAULT_POPOVER_TITLE = 'Pick a date'
+export const DEFAULT_COLOR_SCHEME = 'purple'
+export const DEFAULT_VALID_YEARS = { start: 1900, end: 2100 }

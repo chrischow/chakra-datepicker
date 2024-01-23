@@ -14,14 +14,15 @@ import {
   UseDisclosureReturn,
   useDisclosure,
 } from '@chakra-ui/react'
+import { DEFAULT_COLOR_SCHEME } from './constants'
 
 export type CalendarView = 'day' | 'month' | 'year'
 
 export interface DatePickerContextProps {
   calendarView: CalendarView
   setCalendarView: Dispatch<SetStateAction<CalendarView>>
-  selectedDate: Date|null
-  setSelectedDate: Dispatch<SetStateAction<Date|null>>
+  selectedDate: Date | null
+  setSelectedDate: Dispatch<SetStateAction<Date | null>>
   selectedDateString: string
   setSelectedDateString: Dispatch<SetStateAction<string>>
   displayDate: Date
@@ -29,6 +30,7 @@ export interface DatePickerContextProps {
   getDatesInMonth: (date: Date) => Date[]
   resetToToday: () => void
   resetView: () => void
+  colorScheme?: string & {}
   popoverProps: {
     popoverTitle?: string
     popoverProps?: PopoverProps
@@ -67,6 +69,7 @@ const DatePickerContext = createContext<DatePickerContextProps>({
   getDatesInMonth,
   resetToToday: () => {},
   resetView: () => {},
+  colorScheme: DEFAULT_COLOR_SCHEME,
   popoverProps: {},
   navProps: {},
   calendarProps: {},
@@ -84,8 +87,9 @@ const DatePickerContext = createContext<DatePickerContextProps>({
 
 export interface DatePickerProviderProps {
   children: ReactNode
-  value?: Date|null
-  onChange: (date: Date|null) => void
+  onChange: (date: Date | null) => void
+  value?: Date | null
+  colorScheme?: string & {}
   validYears: { start: number; end: number }
   popoverProps: {
     popoverTitle?: string
@@ -112,6 +116,7 @@ export const DatePickerProvider = ({
   children,
   value,
   onChange,
+  colorScheme,
   validYears,
   navProps = {},
   calendarProps = {},
@@ -120,8 +125,10 @@ export const DatePickerProvider = ({
   const now = new Date()
   now.setHours(0, 0, 0, 0)
   const [calendarView, setCalendarView] = useState<CalendarView>('day')
-  const [selectedDate, setSelectedDate] = useState<Date|null>(value !== undefined ? value : now)
-  const [selectedDateString, setSelectedDateString] = useState<string>(value !== undefined ? (value ? format(value, 'dd/MM/yyyy') : ''): format(now, 'dd/MM/yyyy'))
+  const [selectedDate, setSelectedDate] = useState<Date | null>(value !== undefined ? value : now)
+  const [selectedDateString, setSelectedDateString] = useState<string>(
+    value !== undefined ? (value ? format(value, 'dd/MM/yyyy') : '') : format(now, 'dd/MM/yyyy'),
+  )
   const [displayDate, setDisplayDate] = useState<Date>(value ?? now)
   const popoverDisclosure = useDisclosure()
 
@@ -133,7 +140,6 @@ export const DatePickerProvider = ({
       date.setHours(0, 0, 0, 0)
       setSelectedDate(date)
       setDisplayDate(date)
-      resetView()
     } else {
       setSelectedDate(null)
     }
@@ -141,10 +147,10 @@ export const DatePickerProvider = ({
 
   useEffect(() => {
     if (isSelfManaged) {
-      if (value){
+      if (value) {
         setSelectedDateString(format(value, 'dd/MM/yyyy'))
+        resetView()
       }
-      resetView()
     }
   }, [value])
 
@@ -179,6 +185,7 @@ export const DatePickerProvider = ({
         getDatesInMonth,
         resetToToday,
         resetView,
+        colorScheme,
         popoverProps,
         navProps,
         calendarProps,
