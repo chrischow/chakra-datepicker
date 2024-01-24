@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react'
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi'
 import { IoCalendarNumberOutline } from 'react-icons/io5'
 import SingleDatePicker from './components/SingleDatePicker'
+import DateRangePicker from './components/DateRangePicker'
 
 function App() {
   const [date, setDate] = useState<Date | null>(new Date())
 
   const [date1, setDate1] = useState<Date | null>(null)
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([new Date(), new Date()])
 
   useEffect(() => {
     console.log('[DEMO] Selected new date:', date)
@@ -87,6 +89,11 @@ function App() {
             footerTodayButtonProps={{ colorScheme: 'red' }}
             footerGoToButtonProps={{ colorScheme: 'green' }}
           />
+        </VStack>
+
+        <VStack alignItems="start">
+          <Heading size="lg">Default DateRangePicker</Heading>
+          <DateRangePicker value={dateRange} onChange={setDateRange} />
         </VStack>
       </Box>
     </ChakraProvider>
