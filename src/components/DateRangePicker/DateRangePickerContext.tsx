@@ -1,52 +1,18 @@
-import {
-  ButtonProps,
-  IconButtonProps,
-  InputProps,
-  PopoverArrowProps,
-  PopoverBodyProps,
-  PopoverCloseButtonProps,
-  PopoverContentProps,
-  PopoverHeaderProps,
-  PopoverProps,
-  UseDisclosureReturn,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
 import { format, parse } from 'date-fns'
 import { enGB } from 'date-fns/locale'
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react'
-import { getDatesInMonth, isValidDateInRange } from '../../common/utils'
 import { DEFAULT_COLOR_SCHEME } from '../../common/constants'
+import { getDatesInMonth, isValidDateInRange } from '../../common/utils'
+import { CustomisationProps, Mode } from './types'
 
 export type CalendarView = 'day' | 'month' | 'year'
 
-interface CustomisationProps {
-  colorScheme?: string & {}
-  inputProps?: InputProps
-  inputButtonProps?: Partial<IconButtonProps>
-  popoverProps: {
-    popoverTitle?: string
-    popoverProps?: PopoverProps
-    popoverHeaderProps?: PopoverHeaderProps
-    popoverCloseButtonProps?: PopoverCloseButtonProps
-    popoverContentProps?: PopoverContentProps
-    popoverArrowProps?: PopoverArrowProps
-    popoverBodyProps?: PopoverBodyProps
-  }
-  navProps: {
-    navBackButtonProps?: Partial<IconButtonProps>
-    navForwardButtonProps?: Partial<IconButtonProps>
-    navCenterButtonProps?: ButtonProps
-  }
-  calendarProps: {
-    calendarButtonProps?: ButtonProps
-    footerTodayButtonProps?: ButtonProps
-    footerGoToButtonProps?: ButtonProps
-  }
-}
-
 export interface DateRangePickerContextProps extends CustomisationProps {
-  calendarView: CalendarView
-  setCalendarView: Dispatch<SetStateAction<CalendarView>>
+  startCalendarView: CalendarView
+  setStartCalendarView: Dispatch<SetStateAction<CalendarView>>
+  endCalendarView: CalendarView
+  setEndCalendarView: Dispatch<SetStateAction<CalendarView>>
   selectedStartDate: Date | null
   setSelectedStartDate: Dispatch<SetStateAction<Date | null>>
   selectedStartDateString: string
@@ -61,7 +27,7 @@ export interface DateRangePickerContextProps extends CustomisationProps {
   setDisplayEndDate: Dispatch<SetStateAction<Date>>
   getDatesInMonth: (date: Date) => Date[]
   resetToToday: () => void
-  resetView: () => void
+  resetView: (mode: Mode) => void
   validYears: { start: number; end: number }
   isValidDate: (dateString: string) => boolean
   popoverDisclosure: UseDisclosureReturn
@@ -71,8 +37,10 @@ const starterDate = new Date()
 starterDate.setHours(0, 0, 0, 0)
 
 const DateRangePickerContext = createContext<DateRangePickerContextProps>({
-  calendarView: 'day',
-  setCalendarView: () => {},
+  startCalendarView: 'day',
+  setStartCalendarView: () => {},
+  endCalendarView: 'day',
+  setEndCalendarView: () => {},
   selectedStartDate: starterDate,
   setSelectedStartDate: () => {},
   selectedStartDateString: '',
@@ -93,7 +61,7 @@ const DateRangePickerContext = createContext<DateRangePickerContextProps>({
   colorScheme: DEFAULT_COLOR_SCHEME,
   inputProps: {},
   inputButtonProps: {},
-  popoverProps: {},
+  popoverComponentProps: {},
   navProps: {},
   calendarProps: {},
   popoverDisclosure: {
@@ -124,7 +92,7 @@ export const DateRangePickerProvider = ({
   inputButtonProps = {},
   navProps = {},
   calendarProps = {},
-  popoverProps = {},
+  popoverComponentProps = {},
 }: DateRangePickerProviderProps) => {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
@@ -132,18 +100,19 @@ export const DateRangePickerProvider = ({
   tomorrow.setHours(23, 59, 59, 999)
   const initialStartDate = value ? value[0] ?? today : today
   const initialEndDate = value ? value[0] ?? today : today
-  const [calendarView, setCalendarView] = useState<CalendarView>('day')
+  const [startCalendarView, setStartCalendarView] = useState<CalendarView>('day')
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(initialStartDate)
+  const [displayStartDate, setDisplayStartDate] = useState<Date>(initialStartDate)
   const [selectedStartDateString, setSelectedStartDateString] = useState<string>(
     value ? (value[0] ? format(value[0], 'dd/MM/yyyy') : '') : format(today, 'dd/MM/yyyy'),
   )
-  const [displayStartDate, setDisplayStartDate] = useState<Date>(initialStartDate)
 
+  const [endCalendarView, setEndCalendarView] = useState<CalendarView>('day')
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(initialEndDate)
-  const [selectedEndDateString, setSelectedEndDateString] = useState<string>(
-    value ? (value[0] ? format(value[0], 'dd/MM/yyyy') : '') : format(today, 'dd/MM/yyyy'),
-  )
   const [displayEndDate, setDisplayEndDate] = useState<Date>(initialEndDate)
+  const [selectedEndDateString, setSelectedEndDateString] = useState<string>(
+    value ? (value[1] ? format(value[1], 'dd/MM/yyyy') : '') : format(today, 'dd/MM/yyyy'),
+  )
 
   const popoverDisclosure = useDisclosure()
   const isSelfManaged = value !== undefined
@@ -178,11 +147,12 @@ export const DateRangePickerProvider = ({
     if (isSelfManaged && value) {
       if (value[0]) {
         setSelectedStartDateString(format(value[0], 'dd/MM/yyyy'))
+        resetView('start')
       }
       if (value[1]) {
-        setSelectedStartDateString(format(value[1], 'dd/MM/yyyy'))
+        setSelectedEndDateString(format(value[1], 'dd/MM/yyyy'))
+        resetView('end')
       }
-      resetView()
     }
   }, [value])
 
@@ -195,19 +165,25 @@ export const DateRangePickerProvider = ({
     setSelectedStartDate(today)
     setSelectedStartDateString(format(today, 'dd/MM/yyyy'))
     setDisplayStartDate(today)
-    setCalendarView('day')
+    setStartCalendarView('day')
   }
 
-  const resetView = () => {
+  const resetView = (mode: Mode) => {
     setDisplayStartDate(selectedStartDate ?? today)
-    setCalendarView('day')
+    if (mode === 'start') {
+      setStartCalendarView('day')
+    } else {
+      setEndCalendarView('day')
+    }
   }
 
   return (
     <DateRangePickerContext.Provider
       value={{
-        calendarView,
-        setCalendarView,
+        startCalendarView,
+        setStartCalendarView,
+        endCalendarView,
+        setEndCalendarView,
         selectedStartDate,
         setSelectedStartDate,
         selectedStartDateString,
@@ -228,7 +204,7 @@ export const DateRangePickerProvider = ({
         colorScheme,
         inputProps,
         inputButtonProps,
-        popoverProps,
+        popoverComponentProps,
         navProps,
         calendarProps,
         popoverDisclosure,
