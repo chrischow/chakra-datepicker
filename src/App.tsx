@@ -41,7 +41,7 @@ function App() {
               Reset
             </Button>
           </HStack>
-          <SingleDatePicker value={date1} onChange={setDate1} />
+          <SingleDatePicker value={date1} onChange={setDate1} allowManualInput={true} />
         </VStack>
 
         <VStack mt={8} alignItems="start">
