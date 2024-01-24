@@ -26,6 +26,7 @@ const DateInput = () => {
     colorScheme,
     inputProps,
     inputButtonProps,
+    allowManualInput,
     popoverProps: {
       popoverTitle,
       popoverProps,
@@ -54,6 +55,12 @@ const DateInput = () => {
         focusBorderColor={`${colorScheme}.500`}
         placeholder="dd/mm/yyyy"
         {...inputProps}
+        onClick={() => {
+          if (!allowManualInput) {
+            popoverDisclosure.onToggle()
+          }
+        }}
+        _hover={{ cursor: allowManualInput ? undefined : 'pointer' }}
         isInvalid={!isValidDate(selectedDateString)}
         value={selectedDateString}
         onChange={handleSelectedDate}

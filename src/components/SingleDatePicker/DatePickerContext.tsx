@@ -57,6 +57,7 @@ export interface DatePickerContextProps extends CustomisationProps {
   resetToToday: () => void
   resetView: () => void
   validYears: { start: number; end: number }
+  allowManualInput: boolean
   isValidDate: (dateString: string) => boolean
   popoverDisclosure: UseDisclosureReturn
 }
@@ -77,6 +78,7 @@ const DatePickerContext = createContext<DatePickerContextProps>({
   resetToToday: () => {},
   resetView: () => {},
   validYears: { start: 1900, end: 2100 },
+  allowManualInput: false,
   isValidDate: () => true,
   colorScheme: DEFAULT_COLOR_SCHEME,
   inputProps: {},
@@ -99,6 +101,7 @@ export interface DatePickerProviderProps extends CustomisationProps {
   children: ReactNode
   onChange: (date: Date | null) => void
   value?: Date | null
+  allowManualInput: boolean
   validYears: { start: number; end: number }
 }
 
@@ -106,6 +109,7 @@ export const DatePickerProvider = ({
   children,
   value,
   onChange,
+  allowManualInput,
   colorScheme,
   validYears,
   inputProps = {},
@@ -184,6 +188,7 @@ export const DatePickerProvider = ({
         resetToToday,
         resetView,
         validYears,
+        allowManualInput,
         isValidDate,
         colorScheme,
         inputProps,

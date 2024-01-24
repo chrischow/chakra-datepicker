@@ -65,6 +65,7 @@ export const monthLookup = {
   },
 }
 
+export const DEFAULT_ALLOW_MANUAL_INPUT = false
 export const DEFAULT_SINGLE_POPOVER_TITLE = 'Pick a date'
 export const DEFAULT_RANGE_POPOVER_TITLE = 'Pick a date range'
 export const DEFAULT_COLOR_SCHEME = 'purple'
