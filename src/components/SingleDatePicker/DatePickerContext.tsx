@@ -139,7 +139,9 @@ export const DatePickerProvider = ({
 
   useEffect(() => {
     if (isSelfManaged) {
-      if (value) {
+      // Condition to break loop
+      if (value && value.getTime() !== selectedDate?.getTime()) {
+        console.log('running')
         setSelectedDateString(format(value, 'dd/MM/yyyy'))
         resetView()
       }
