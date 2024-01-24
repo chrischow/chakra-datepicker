@@ -7,17 +7,21 @@ import { Mode } from '../types'
 
 const YearCalendar = ({ mode }: { mode: Mode }) => {
   const {
+    // Config
+    validYears,
+    // Start date state
+    setStartCalendarView,
     selectedStartDate,
     displayStartDate,
     setDisplayStartDate,
+    // End date state
+    setEndCalendarView,
     selectedEndDate,
     displayEndDate,
     setDisplayEndDate,
-    setStartCalendarView,
-    setEndCalendarView,
-    colorScheme,
+    // Customisation
     calendarProps: { calendarButtonProps },
-    validYears,
+    colorScheme,
   } = useDateRangePicker()
 
   const isStart = mode === 'start'

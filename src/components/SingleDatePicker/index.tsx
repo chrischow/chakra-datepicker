@@ -19,59 +19,69 @@ import {
 } from '../../common/constants'
 
 export interface DatePickerProps {
+  // Standard input props
   onChange: (date: Date | null) => void
   value?: Date | null
+
+  // Config
   allowManualInput?: boolean
-  colorScheme?: string & {}
   validYears?: { start: number; end: number }
-  inputProps?: InputProps
+
+  // Customisation
+  calendarButtonProps?: ButtonProps
+  colorScheme?: string & {}
+  footerGoToButtonProps?: ButtonProps
+  footerTodayButtonProps?: ButtonProps
   inputButtonProps?: Partial<IconButtonProps>
-  popoverTitle?: string
-  popoverProps?: PopoverProps
-  popoverHeaderProps?: PopoverHeaderProps
-  popoverCloseButtonProps?: PopoverCloseButtonProps
-  popoverContentProps?: PopoverContentProps
+  inputProps?: InputProps
+  navBackButtonProps?: Partial<IconButtonProps>
+  navCenterButtonProps?: ButtonProps
+  navForwardButtonProps?: Partial<IconButtonProps>
   popoverArrowProps?: PopoverArrowProps
   popoverBodyProps?: PopoverBodyProps
-  navBackButtonProps?: Partial<IconButtonProps>
-  navForwardButtonProps?: Partial<IconButtonProps>
-  navCenterButtonProps?: ButtonProps
-  calendarButtonProps?: ButtonProps
-  footerTodayButtonProps?: ButtonProps
-  footerGoToButtonProps?: ButtonProps
+  popoverCloseButtonProps?: PopoverCloseButtonProps
+  popoverContentProps?: PopoverContentProps
+  popoverHeaderProps?: PopoverHeaderProps
+  popoverProps?: PopoverProps
+  popoverTitle?: string
 }
 
 const SingleDatePicker = ({
+  // Standard input props
   onChange,
   value,
+  // Config
   allowManualInput = DEFAULT_ALLOW_MANUAL_INPUT,
-  colorScheme = DEFAULT_COLOR_SCHEME,
   validYears = DEFAULT_VALID_YEARS,
-  inputProps,
+  // Customisation
+  calendarButtonProps,
+  colorScheme = DEFAULT_COLOR_SCHEME,
+  footerGoToButtonProps,
+  footerTodayButtonProps,
   inputButtonProps,
-  popoverTitle = DEFAULT_SINGLE_POPOVER_TITLE,
-  popoverProps,
-  popoverHeaderProps,
-  popoverCloseButtonProps,
-  popoverContentProps,
+  inputProps,
+  navBackButtonProps,
+  navCenterButtonProps,
+  navForwardButtonProps,
   popoverArrowProps,
   popoverBodyProps,
-  navBackButtonProps,
-  navForwardButtonProps,
-  navCenterButtonProps,
-  calendarButtonProps,
-  footerTodayButtonProps,
-  footerGoToButtonProps,
+  popoverCloseButtonProps,
+  popoverContentProps,
+  popoverHeaderProps,
+  popoverProps,
+  popoverTitle = DEFAULT_SINGLE_POPOVER_TITLE,
 }: DatePickerProps) => {
   return (
     <DatePickerProvider
       onChange={onChange}
       value={value}
       allowManualInput={allowManualInput}
-      colorScheme={colorScheme}
       validYears={validYears}
-      inputProps={inputProps}
+      calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
+      colorScheme={colorScheme}
       inputButtonProps={inputButtonProps}
+      inputProps={inputProps}
+      navProps={{ navBackButtonProps, navForwardButtonProps, navCenterButtonProps }}
       popoverProps={{
         popoverTitle,
         popoverProps,
@@ -81,8 +91,6 @@ const SingleDatePicker = ({
         popoverArrowProps,
         popoverBodyProps,
       }}
-      navProps={{ navBackButtonProps, navForwardButtonProps, navCenterButtonProps }}
-      calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
     >
       <DateInput />
     </DatePickerProvider>

@@ -20,15 +20,26 @@ import { FormEvent } from 'react'
 
 const DateRangeInput = () => {
   const {
-    colorScheme,
-    inputProps,
+    // Config
     allowManualInput,
+
+    // Start date state
+    selectedStartDate,
     selectedStartDateString,
     setSelectedStartDateString,
+
+    // End date state
+    selectedEndDate,
     selectedEndDateString,
     setSelectedEndDateString,
-    selectedStartDate,
-    selectedEndDate,
+
+    // Utilities
+    isValidDate,
+    resetView,
+
+    // Customisation
+    colorScheme,
+    inputProps,
     popoverComponentProps: {
       popoverTitle,
       popoverProps,
@@ -38,9 +49,9 @@ const DateRangeInput = () => {
       popoverArrowProps,
       popoverBodyProps,
     },
-    resetView,
+
+    // Behaviour
     popoverDisclosure,
-    isValidDate,
   } = useDateRangePicker()
 
   const handleClose = () => {

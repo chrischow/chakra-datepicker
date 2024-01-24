@@ -8,16 +8,19 @@ import { days, monthLookup } from '../../../common/constants'
 const DayCalendar = () => {
   const {
     selectedDate,
+    // State
+    setCalendarView,
     selectedDateString,
     setSelectedDateString,
     displayDate,
     setDisplayDate,
+    // Utilities
     getDatesInMonth,
-    setCalendarView,
+    isValidDate,
+    // Customisation
+    calendarProps: { calendarButtonProps },
     colorScheme,
     navProps: { navCenterButtonProps },
-    calendarProps: { calendarButtonProps },
-    isValidDate,
   } = useDatePicker()
 
   // Functions for navigator action buttons

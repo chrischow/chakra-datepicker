@@ -7,17 +7,20 @@ import { Mode } from '../types'
 
 const MonthCalendar = ({ mode }: { mode: Mode }) => {
   const {
+    // Start date state
+    setStartCalendarView,
     selectedStartDate,
     displayStartDate,
     setDisplayStartDate,
+    // End date state
+    setEndCalendarView,
     selectedEndDate,
     displayEndDate,
     setDisplayEndDate,
-    setStartCalendarView,
-    setEndCalendarView,
+    // Customisation
+    calendarProps: { calendarButtonProps },
     colorScheme,
     navProps: { navCenterButtonProps },
-    calendarProps: { calendarButtonProps },
   } = useDateRangePicker()
 
   const isStart = mode === 'start'

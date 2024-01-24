@@ -20,59 +20,69 @@ import { DateRangePickerProvider } from './DateRangePickerContext'
 import { CustomisationProps } from './types'
 
 export interface DatePickerProps extends CustomisationProps {
+  // Standard input props
   onChange: (dateRange: [Date | null, Date | null]) => void
   value?: [Date | null, Date | null]
+  // Config
   allowManualInput?: boolean
   validYears?: { start: number; end: number }
+  // Customisation
+  calendarButtonProps?: ButtonProps
   colorScheme?: string & {}
-  inputProps?: InputProps
   inputButtonProps?: Partial<IconButtonProps>
-  popoverTitle?: string
-  popoverProps?: PopoverProps
-  popoverHeaderProps?: PopoverHeaderProps
-  popoverCloseButtonProps?: PopoverCloseButtonProps
-  popoverContentProps?: PopoverContentProps
+  inputProps?: InputProps
+  footerGoToButtonProps?: ButtonProps
+  footerTodayButtonProps?: ButtonProps
+  navBackButtonProps?: Partial<IconButtonProps>
+  navCenterButtonProps?: ButtonProps
+  navForwardButtonProps?: Partial<IconButtonProps>
   popoverArrowProps?: PopoverArrowProps
   popoverBodyProps?: PopoverBodyProps
-  navBackButtonProps?: Partial<IconButtonProps>
-  navForwardButtonProps?: Partial<IconButtonProps>
-  navCenterButtonProps?: ButtonProps
-  calendarButtonProps?: ButtonProps
-  footerTodayButtonProps?: ButtonProps
-  footerGoToButtonProps?: ButtonProps
+  popoverCloseButtonProps?: PopoverCloseButtonProps
+  popoverContentProps?: PopoverContentProps
+  popoverHeaderProps?: PopoverHeaderProps
+  popoverProps?: PopoverProps
+  popoverTitle?: string
 }
 
 const DateRangePicker = ({
+  // Standard input props
   onChange,
   value,
+
+  // Config
   allowManualInput = DEFAULT_ALLOW_MANUAL_INPUT,
-  colorScheme = DEFAULT_COLOR_SCHEME,
   validYears = DEFAULT_VALID_YEARS,
+
+  // Customisation
+  calendarButtonProps,
+  colorScheme = DEFAULT_COLOR_SCHEME,
+  footerGoToButtonProps,
+  footerTodayButtonProps,
   inputProps,
   inputButtonProps,
-  popoverTitle = DEFAULT_RANGE_POPOVER_TITLE,
-  popoverProps,
-  popoverHeaderProps,
-  popoverCloseButtonProps,
-  popoverContentProps,
+  navBackButtonProps,
+  navCenterButtonProps,
+  navForwardButtonProps,
   popoverArrowProps,
   popoverBodyProps,
-  navBackButtonProps,
-  navForwardButtonProps,
-  navCenterButtonProps,
-  calendarButtonProps,
-  footerTodayButtonProps,
-  footerGoToButtonProps,
+  popoverCloseButtonProps,
+  popoverContentProps,
+  popoverHeaderProps,
+  popoverProps,
+  popoverTitle = DEFAULT_RANGE_POPOVER_TITLE,
 }: DatePickerProps) => {
   return (
     <DateRangePickerProvider
       onChange={onChange}
       value={value}
       allowManualInput={allowManualInput}
-      colorScheme={colorScheme}
       validYears={validYears}
-      inputProps={inputProps}
+      calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
+      colorScheme={colorScheme}
       inputButtonProps={inputButtonProps}
+      inputProps={inputProps}
+      navProps={{ navBackButtonProps, navForwardButtonProps, navCenterButtonProps }}
       popoverComponentProps={{
         popoverTitle,
         popoverProps,
@@ -82,8 +92,6 @@ const DateRangePicker = ({
         popoverArrowProps,
         popoverBodyProps,
       }}
-      navProps={{ navBackButtonProps, navForwardButtonProps, navCenterButtonProps }}
-      calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
     >
       <DateRangeInput />
     </DateRangePickerProvider>

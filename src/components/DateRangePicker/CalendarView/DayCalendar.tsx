@@ -8,23 +8,27 @@ import { Mode } from '../types'
 
 const DayCalendar = ({ mode }: { mode: Mode }) => {
   const {
+    // Start date state
+    setStartCalendarView,
     selectedStartDate,
     selectedStartDateString,
     setSelectedStartDateString,
     displayStartDate,
     setDisplayStartDate,
+    // End date state
+    setEndCalendarView,
     selectedEndDate,
     selectedEndDateString,
     setSelectedEndDateString,
     displayEndDate,
     setDisplayEndDate,
+    // Utilities
     getDatesInMonth,
-    setStartCalendarView,
-    setEndCalendarView,
+    isValidDate,
+    // Customisation
     colorScheme,
     navProps: { navCenterButtonProps },
     calendarProps: { calendarButtonProps },
-    isValidDate,
   } = useDateRangePicker()
 
   const isStart = mode === 'start'

@@ -3,10 +3,10 @@ import { useDatePicker } from './DatePickerContext'
 
 const Footer = () => {
   const {
-    resetToToday,
+    setCalendarView,
     selectedDate,
     setDisplayDate,
-    setCalendarView,
+    resetToToday,
     colorScheme,
     calendarProps: { footerTodayButtonProps, footerGoToButtonProps },
   } = useDatePicker()

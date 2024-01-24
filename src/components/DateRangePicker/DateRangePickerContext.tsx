@@ -2,35 +2,44 @@ import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
 import { format, parse } from 'date-fns'
 import { enGB } from 'date-fns/locale'
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react'
-import { DEFAULT_ALLOW_MANUAL_INPUT, DEFAULT_COLOR_SCHEME } from '../../common/constants'
+import { DEFAULT_ALLOW_MANUAL_INPUT, DEFAULT_COLOR_SCHEME, DEFAULT_VALID_YEARS } from '../../common/constants'
 import { getDatesInMonth, isValidDateInRange } from '../../common/utils'
 import { CustomisationProps, Mode } from './types'
 
 export type CalendarView = 'day' | 'month' | 'year'
 
 export interface DateRangePickerContextProps extends CustomisationProps {
+  // Config
+  allowManualInput: boolean
+  validYears: { start: number; end: number }
+
+  // Start date state
   startCalendarView: CalendarView
   setStartCalendarView: Dispatch<SetStateAction<CalendarView>>
-  endCalendarView: CalendarView
-  setEndCalendarView: Dispatch<SetStateAction<CalendarView>>
   selectedStartDate: Date | null
   setSelectedStartDate: Dispatch<SetStateAction<Date | null>>
   selectedStartDateString: string
   setSelectedStartDateString: Dispatch<SetStateAction<string>>
   displayStartDate: Date
   setDisplayStartDate: Dispatch<SetStateAction<Date>>
+
+  // End date state
+  endCalendarView: CalendarView
+  setEndCalendarView: Dispatch<SetStateAction<CalendarView>>
   selectedEndDate: Date | null
   setSelectedEndDate: Dispatch<SetStateAction<Date | null>>
   selectedEndDateString: string
   setSelectedEndDateString: Dispatch<SetStateAction<string>>
   displayEndDate: Date
   setDisplayEndDate: Dispatch<SetStateAction<Date>>
+
+  // Utilities
   getDatesInMonth: (date: Date) => Date[]
+  isValidDate: (dateString: string) => boolean
   resetToToday: () => void
   resetView: (mode: Mode) => void
-  validYears: { start: number; end: number }
-  allowManualInput: boolean
-  isValidDate: (dateString: string) => boolean
+
+  // Behaviour
   popoverDisclosure: UseDisclosureReturn
 }
 
@@ -38,34 +47,43 @@ const starterDate = new Date()
 starterDate.setHours(0, 0, 0, 0)
 
 const DateRangePickerContext = createContext<DateRangePickerContextProps>({
+  // Config
+  allowManualInput: DEFAULT_ALLOW_MANUAL_INPUT,
+  validYears: DEFAULT_VALID_YEARS,
+
+  // Start date state
   startCalendarView: 'day',
   setStartCalendarView: () => {},
-  endCalendarView: 'day',
-  setEndCalendarView: () => {},
   selectedStartDate: starterDate,
   setSelectedStartDate: () => {},
   selectedStartDateString: '',
   setSelectedStartDateString: () => {},
   displayStartDate: starterDate,
   setDisplayStartDate: () => {},
+
+  // End date state
+  endCalendarView: 'day',
+  setEndCalendarView: () => {},
   selectedEndDate: starterDate,
   setSelectedEndDate: () => {},
   selectedEndDateString: '',
   setSelectedEndDateString: () => {},
   displayEndDate: starterDate,
   setDisplayEndDate: () => {},
-  getDatesInMonth,
+
+  // Utilities
+  getDatesInMonth: () => [],
+  isValidDate: () => true,
   resetToToday: () => {},
   resetView: () => {},
-  validYears: { start: 1900, end: 2100 },
-  allowManualInput: DEFAULT_ALLOW_MANUAL_INPUT,
-  isValidDate: () => true,
-  colorScheme: DEFAULT_COLOR_SCHEME,
-  inputProps: {},
-  inputButtonProps: {},
-  popoverComponentProps: {},
-  navProps: {},
+
+  // Customisation
   calendarProps: {},
+  colorScheme: DEFAULT_COLOR_SCHEME,
+  inputButtonProps: {},
+  inputProps: {},
+  navProps: {},
+  popoverComponentProps: {},
   popoverDisclosure: {
     isOpen: false,
     onOpen: () => {},
@@ -86,16 +104,21 @@ export interface DateRangePickerProviderProps extends CustomisationProps {
 }
 
 export const DateRangePickerProvider = ({
+  // Standard input props
   children,
   value,
   onChange,
+
+  // Config
   allowManualInput,
-  colorScheme,
   validYears,
-  inputProps = {},
-  inputButtonProps = {},
-  navProps = {},
+
+  // Customisation
   calendarProps = {},
+  colorScheme,
+  inputButtonProps = {},
+  inputProps = {},
+  navProps = {},
   popoverComponentProps = {},
 }: DateRangePickerProviderProps) => {
   const today = new Date()
@@ -184,34 +207,43 @@ export const DateRangePickerProvider = ({
   return (
     <DateRangePickerContext.Provider
       value={{
+        // Config
+        allowManualInput,
+        validYears,
+
+        // Start date state
         startCalendarView,
         setStartCalendarView,
-        endCalendarView,
-        setEndCalendarView,
         selectedStartDate,
         setSelectedStartDate,
         selectedStartDateString,
         setSelectedStartDateString,
         displayStartDate,
         setDisplayStartDate,
+
+        // End date state
+        endCalendarView,
+        setEndCalendarView,
         selectedEndDate,
         setSelectedEndDate,
         selectedEndDateString,
         setSelectedEndDateString,
         displayEndDate,
         setDisplayEndDate,
+
+        // Utilities
         getDatesInMonth,
+        isValidDate,
         resetToToday,
         resetView,
-        validYears,
-        allowManualInput,
-        isValidDate,
-        colorScheme,
-        inputProps,
-        inputButtonProps,
-        popoverComponentProps,
-        navProps,
+
+        // Customisation
         calendarProps,
+        colorScheme,
+        inputButtonProps,
+        inputProps,
+        navProps,
+        popoverComponentProps,
         popoverDisclosure,
       }}
     >

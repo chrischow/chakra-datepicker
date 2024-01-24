@@ -20,13 +20,18 @@ import Footer from './Footer'
 
 const DateInput = () => {
   const {
+    // Config
+    allowManualInput,
+    // State
     selectedDateString,
     setSelectedDateString,
+    // Utilities
+    isValidDate,
     resetView,
+    // Customisation
     colorScheme,
-    inputProps,
     inputButtonProps,
-    allowManualInput,
+    inputProps,
     popoverProps: {
       popoverTitle,
       popoverProps,
@@ -36,8 +41,8 @@ const DateInput = () => {
       popoverArrowProps,
       popoverBodyProps,
     },
+    // Behaviour
     popoverDisclosure,
-    isValidDate,
   } = useDatePicker()
 
   const handleSelectedDate = (event: FormEvent<HTMLInputElement>) => {

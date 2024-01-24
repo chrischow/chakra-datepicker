@@ -15,36 +15,40 @@ import {
   UseDisclosureReturn,
   useDisclosure,
 } from '@chakra-ui/react'
-import { DEFAULT_COLOR_SCHEME } from '../../common/constants'
+import { DEFAULT_ALLOW_MANUAL_INPUT, DEFAULT_COLOR_SCHEME, DEFAULT_VALID_YEARS } from '../../common/constants'
 
 export type CalendarView = 'day' | 'month' | 'year'
 
 interface CustomisationProps {
-  colorScheme?: string & {}
-  inputProps?: InputProps
-  inputButtonProps?: Partial<IconButtonProps>
-  popoverProps: {
-    popoverTitle?: string
-    popoverProps?: PopoverProps
-    popoverHeaderProps?: PopoverHeaderProps
-    popoverCloseButtonProps?: PopoverCloseButtonProps
-    popoverContentProps?: PopoverContentProps
-    popoverArrowProps?: PopoverArrowProps
-    popoverBodyProps?: PopoverBodyProps
-  }
-  navProps: {
-    navBackButtonProps?: Partial<IconButtonProps>
-    navForwardButtonProps?: Partial<IconButtonProps>
-    navCenterButtonProps?: ButtonProps
-  }
   calendarProps: {
     calendarButtonProps?: ButtonProps
     footerTodayButtonProps?: ButtonProps
     footerGoToButtonProps?: ButtonProps
   }
+  colorScheme?: string & {}
+  inputButtonProps?: Partial<IconButtonProps>
+  inputProps?: InputProps
+  navProps: {
+    navBackButtonProps?: Partial<IconButtonProps>
+    navCenterButtonProps?: ButtonProps
+    navForwardButtonProps?: Partial<IconButtonProps>
+  }
+  popoverProps: {
+    popoverArrowProps?: PopoverArrowProps
+    popoverBodyProps?: PopoverBodyProps
+    popoverCloseButtonProps?: PopoverCloseButtonProps
+    popoverContentProps?: PopoverContentProps
+    popoverHeaderProps?: PopoverHeaderProps
+    popoverProps?: PopoverProps
+    popoverTitle?: string
+  }
 }
 
 export interface DatePickerContextProps extends CustomisationProps {
+  // Config
+  allowManualInput: boolean
+  validYears: { start: number; end: number }
+  // State
   calendarView: CalendarView
   setCalendarView: Dispatch<SetStateAction<CalendarView>>
   selectedDate: Date | null
@@ -53,12 +57,12 @@ export interface DatePickerContextProps extends CustomisationProps {
   setSelectedDateString: Dispatch<SetStateAction<string>>
   displayDate: Date
   setDisplayDate: Dispatch<SetStateAction<Date>>
+  // Utilities
+  isValidDate: (dateString: string) => boolean
   getDatesInMonth: (date: Date) => Date[]
   resetToToday: () => void
   resetView: () => void
-  validYears: { start: number; end: number }
-  allowManualInput: boolean
-  isValidDate: (dateString: string) => boolean
+  // Behaviour
   popoverDisclosure: UseDisclosureReturn
 }
 
@@ -66,6 +70,10 @@ const starterDate = new Date()
 starterDate.setHours(0, 0, 0, 0)
 
 const DatePickerContext = createContext<DatePickerContextProps>({
+  // Config
+  allowManualInput: DEFAULT_ALLOW_MANUAL_INPUT,
+  validYears: DEFAULT_VALID_YEARS,
+  // State
   calendarView: 'day',
   setCalendarView: () => {},
   selectedDate: starterDate,
@@ -74,18 +82,19 @@ const DatePickerContext = createContext<DatePickerContextProps>({
   setSelectedDateString: () => {},
   displayDate: starterDate,
   setDisplayDate: () => {},
-  getDatesInMonth,
+  // Utilities
+  isValidDate: () => true,
+  getDatesInMonth: () => [],
   resetToToday: () => {},
   resetView: () => {},
-  validYears: { start: 1900, end: 2100 },
-  allowManualInput: false,
-  isValidDate: () => true,
-  colorScheme: DEFAULT_COLOR_SCHEME,
-  inputProps: {},
-  inputButtonProps: {},
-  popoverProps: {},
-  navProps: {},
+  // Customisation
   calendarProps: {},
+  colorScheme: DEFAULT_COLOR_SCHEME,
+  inputButtonProps: {},
+  inputProps: {},
+  navProps: {},
+  popoverProps: {},
+  // Behaviour
   popoverDisclosure: {
     isOpen: false,
     onOpen: () => {},
@@ -106,16 +115,19 @@ export interface DatePickerProviderProps extends CustomisationProps {
 }
 
 export const DatePickerProvider = ({
+  // Standard input props
   children,
   value,
   onChange,
+  // Config
   allowManualInput,
-  colorScheme,
   validYears,
-  inputProps = {},
-  inputButtonProps = {},
-  navProps = {},
+  // Customisation
   calendarProps = {},
+  colorScheme,
+  inputButtonProps = {},
+  inputProps = {},
+  navProps = {},
   popoverProps = {},
 }: DatePickerProviderProps) => {
   const now = new Date()
