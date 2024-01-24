@@ -39,6 +39,7 @@ const DateRangeInput = () => {
 
     // Customisation
     colorScheme,
+    inputButtonProps,
     inputProps,
     popoverComponentProps: {
       popoverTitle,
@@ -113,6 +114,7 @@ const DateRangeInput = () => {
             icon={<CalendarIcon />}
             variant="ghost"
             aria-label="Open calendar"
+            {...inputButtonProps}
             onClick={popoverDisclosure.onToggle}
           />
         </PopoverTrigger>
