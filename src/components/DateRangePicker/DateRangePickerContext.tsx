@@ -2,7 +2,7 @@ import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
 import { format, parse } from 'date-fns'
 import { enGB } from 'date-fns/locale'
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react'
-import { DEFAULT_COLOR_SCHEME } from '../../common/constants'
+import { DEFAULT_ALLOW_MANUAL_INPUT, DEFAULT_COLOR_SCHEME } from '../../common/constants'
 import { getDatesInMonth, isValidDateInRange } from '../../common/utils'
 import { CustomisationProps, Mode } from './types'
 
@@ -29,6 +29,7 @@ export interface DateRangePickerContextProps extends CustomisationProps {
   resetToToday: () => void
   resetView: (mode: Mode) => void
   validYears: { start: number; end: number }
+  allowManualInput: boolean
   isValidDate: (dateString: string) => boolean
   popoverDisclosure: UseDisclosureReturn
 }
@@ -57,6 +58,7 @@ const DateRangePickerContext = createContext<DateRangePickerContextProps>({
   resetToToday: () => {},
   resetView: () => {},
   validYears: { start: 1900, end: 2100 },
+  allowManualInput: DEFAULT_ALLOW_MANUAL_INPUT,
   isValidDate: () => true,
   colorScheme: DEFAULT_COLOR_SCHEME,
   inputProps: {},
@@ -79,6 +81,7 @@ export interface DateRangePickerProviderProps extends CustomisationProps {
   children: ReactNode
   onChange: (dateRange: [Date | null, Date | null]) => void
   value?: [Date | null, Date | null]
+  allowManualInput: boolean
   validYears: { start: number; end: number }
 }
 
@@ -86,6 +89,7 @@ export const DateRangePickerProvider = ({
   children,
   value,
   onChange,
+  allowManualInput,
   colorScheme,
   validYears,
   inputProps = {},
@@ -200,6 +204,7 @@ export const DateRangePickerProvider = ({
         resetToToday,
         resetView,
         validYears,
+        allowManualInput,
         isValidDate,
         colorScheme,
         inputProps,

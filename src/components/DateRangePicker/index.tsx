@@ -1,5 +1,20 @@
-import { InputProps, IconButtonProps, PopoverProps, PopoverHeaderProps, PopoverCloseButtonProps, PopoverContentProps, PopoverArrowProps, PopoverBodyProps, ButtonProps } from '@chakra-ui/react'
-import { DEFAULT_COLOR_SCHEME, DEFAULT_RANGE_POPOVER_TITLE, DEFAULT_VALID_YEARS } from '../../common/constants'
+import {
+  InputProps,
+  IconButtonProps,
+  PopoverProps,
+  PopoverHeaderProps,
+  PopoverCloseButtonProps,
+  PopoverContentProps,
+  PopoverArrowProps,
+  PopoverBodyProps,
+  ButtonProps,
+} from '@chakra-ui/react'
+import {
+  DEFAULT_ALLOW_MANUAL_INPUT,
+  DEFAULT_COLOR_SCHEME,
+  DEFAULT_RANGE_POPOVER_TITLE,
+  DEFAULT_VALID_YEARS,
+} from '../../common/constants'
 import DateRangeInput from './DateRangeInput'
 import { DateRangePickerProvider } from './DateRangePickerContext'
 import { CustomisationProps } from './types'
@@ -7,6 +22,7 @@ import { CustomisationProps } from './types'
 export interface DatePickerProps extends CustomisationProps {
   onChange: (dateRange: [Date | null, Date | null]) => void
   value?: [Date | null, Date | null]
+  allowManualInput?: boolean
   validYears?: { start: number; end: number }
   colorScheme?: string & {}
   inputProps?: InputProps
@@ -29,6 +45,7 @@ export interface DatePickerProps extends CustomisationProps {
 const DateRangePicker = ({
   onChange,
   value,
+  allowManualInput = DEFAULT_ALLOW_MANUAL_INPUT,
   colorScheme = DEFAULT_COLOR_SCHEME,
   validYears = DEFAULT_VALID_YEARS,
   inputProps,
@@ -51,6 +68,7 @@ const DateRangePicker = ({
     <DateRangePickerProvider
       onChange={onChange}
       value={value}
+      allowManualInput={allowManualInput}
       colorScheme={colorScheme}
       validYears={validYears}
       inputProps={inputProps}

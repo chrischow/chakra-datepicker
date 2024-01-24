@@ -22,6 +22,7 @@ const DateRangeInput = () => {
   const {
     colorScheme,
     inputProps,
+    allowManualInput,
     selectedStartDateString,
     setSelectedStartDateString,
     selectedEndDateString,
@@ -67,6 +68,12 @@ const DateRangeInput = () => {
         bg="white"
         focusBorderColor={`${colorScheme}.500`}
         {...inputProps}
+        onClick={() => {
+          if (!allowManualInput) {
+            popoverDisclosure.onToggle()
+          }
+        }}
+        _hover={{ cursor: allowManualInput ? undefined : 'pointer' }}
         isInvalid={!isValidDate(selectedStartDateString) || isInvalidRange}
         value={selectedStartDateString}
         onChange={handleSelectedStartDate}
@@ -78,6 +85,12 @@ const DateRangeInput = () => {
         bg="white"
         focusBorderColor={`${colorScheme}.500`}
         {...inputProps}
+        onClick={() => {
+          if (!allowManualInput) {
+            popoverDisclosure.onToggle()
+          }
+        }}
+        _hover={{ cursor: allowManualInput ? undefined : 'pointer' }}
         isInvalid={!isValidDate(selectedEndDateString) || isInvalidRange}
         value={selectedEndDateString}
         onChange={handleSelectedEndDate}
