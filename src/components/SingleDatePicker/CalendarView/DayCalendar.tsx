@@ -2,7 +2,7 @@ import { Box, Button, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { ReactElement } from 'react'
 import { useDatePicker } from '../DatePickerContext'
-import Navigator from '../Navigator'
+import Navigator from '../../../common/Navigator'
 import { days, monthLookup } from '../../../common/constants'
 
 const DayCalendar = () => {

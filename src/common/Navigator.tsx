@@ -1,7 +1,7 @@
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { HStack, IconButton, IconButtonProps } from '@chakra-ui/react'
 import { ReactElement } from 'react'
-import { useDatePicker } from './DatePickerContext'
+import { useDatePicker } from '../components/SingleDatePicker/DatePickerContext'
 
 export interface NavigatorProps {
   centerElement: ReactElement
