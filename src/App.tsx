@@ -17,7 +17,7 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Box p={16} height="100vh" width="700px">
+      <Box p={16} width="700px" mb="500px">
         <VStack alignItems="start">
           <Heading size="lg">Default DatePicker</Heading>
           <SingleDatePicker onChange={setDate} />
@@ -52,7 +52,7 @@ function App() {
             onChange={setDate}
             inputProps={{ size: 'lg' }}
             inputButtonProps={{ size: 'md' }}
-            calendarButtonProps={{size: 'md'}}
+            calendarButtonProps={{ size: 'md' }}
           />
         </VStack>
 
@@ -91,9 +91,15 @@ function App() {
           />
         </VStack>
 
-        <VStack alignItems="start">
+        <VStack mt={8} alignItems="start">
           <Heading size="lg">Default DateRangePicker</Heading>
-          <DateRangePicker value={dateRange} onChange={setDateRange} />
+          <DateRangePicker
+            value={dateRange}
+            onChange={setDateRange}
+            popoverComponentProps={{}}
+            navProps={{}}
+            calendarProps={{}}
+          />
         </VStack>
       </Box>
     </ChakraProvider>
