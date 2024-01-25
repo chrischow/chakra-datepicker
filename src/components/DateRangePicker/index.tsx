@@ -19,7 +19,7 @@ import {
 import DateRangeInput from './DateRangeInput'
 import { DateRangePickerProvider } from './DateRangePickerContext'
 
-export interface DatePickerProps {
+export interface DateRangePickerProps {
   // Standard input props
   onChange: (dateRange: [Date | null, Date | null]) => void
   value?: [Date | null, Date | null]
@@ -73,7 +73,7 @@ const DateRangePicker = ({
   popoverHeaderProps,
   popoverProps,
   popoverTitle = DEFAULT_RANGE_POPOVER_TITLE,
-}: DatePickerProps) => {
+}: DateRangePickerProps) => {
   return (
     <DateRangePickerProvider
       onChange={onChange}
