@@ -1,9 +1,10 @@
 import { Box, Button, ChakraProvider, DarkMode, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi'
+import { FaRegCalendarAlt } from 'react-icons/fa'
 import { IoCalendarNumberOutline } from 'react-icons/io5'
-import SingleDatePicker from './components/SingleDatePicker'
 import DateRangePicker from './components/DateRangePicker'
+import SingleDatePicker from './components/SingleDatePicker'
 
 function App() {
   const [date, setDate] = useState<Date | null>(new Date())
@@ -104,12 +105,19 @@ function App() {
               <DateRangePicker
                 value={dateRange1}
                 onChange={setDateRange1}
-                inputContainerProps={{ bg: 'gray.700', borderColor: 'gray.200', borderRadius: 0, color: 'white' }}
+                inputButtonProps={{ icon: <FaRegCalendarAlt /> }}
+                inputContainerProps={{
+                  border: '1px',
+                  bg: 'gray.800',
+                  borderColor: 'gray.200',
+                  borderRadius: '2px',
+                  color: 'white',
+                }}
                 inputProps={{
                   bg: 'none',
                   borderWidth: 0,
                   width: '150px',
-                  _placeholder: { color: 'gray.300' },
+                  _placeholder: { color: 'gray.400' },
                   errorBorderColor: 'transparent',
                 }}
                 popoverContentProps={{
