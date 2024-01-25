@@ -26,6 +26,27 @@ function App() {
         </VStack>
 
         <VStack mt={8} alignItems="start">
+          <Heading size="lg">Customised Dark Mode</Heading>
+          <DarkMode>
+            <Box bg="gray.800" p={4}>
+              <SingleDatePicker
+                onChange={setDate}
+                inputButtonProps={{ icon: <FaRegCalendarAlt /> }}
+                inputProps={{
+                  bg: 'none',
+                  color: 'white',
+                  width: '200px',
+                  _placeholder: { color: 'gray.400' },
+                }}
+                popoverContentProps={{
+                  color: 'gray.100',
+                }}
+              />
+            </Box>
+          </DarkMode>
+        </VStack>
+
+        <VStack mt={8} alignItems="start">
           <Heading size="lg">Self-managed Date</Heading>
           <Text>
             This allows you to pass <code>value</code> and <code>onChange</code> props to the component.
@@ -99,7 +120,7 @@ function App() {
         </VStack>
 
         <VStack mt={8} alignItems="start">
-          <Heading size="lg">Dark mode DateRangePicker</Heading>
+          <Heading size="lg">Customised dark mode DateRangePicker</Heading>
           <Box bg="gray.800" p={4}>
             <DarkMode>
               <DateRangePicker
