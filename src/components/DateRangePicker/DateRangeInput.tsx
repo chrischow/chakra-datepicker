@@ -12,11 +12,10 @@ import {
   PopoverTrigger,
   Portal,
   Text,
-  VStack,
 } from '@chakra-ui/react'
-import { useDateRangePicker } from './DateRangePickerContext'
-import CalendarView from './CalendarView'
 import { FormEvent } from 'react'
+import CalendarView from './CalendarView'
+import { useDateRangePicker } from './DateRangePickerContext'
 
 const DateRangeInput = () => {
   const {
@@ -135,12 +134,8 @@ const DateRangeInput = () => {
             <PopoverHeader {...popoverHeaderProps}>{popoverTitle}</PopoverHeader>
             <PopoverBody {...popoverBodyProps}>
               <HStack gap={12} alignItems="start">
-                <VStack width="350px">
-                  <CalendarView mode="start" />
-                </VStack>
-                <VStack width="350px">
-                  <CalendarView mode="end" />
-                </VStack>
+                <CalendarView mode="start" />
+                <CalendarView mode="end" />
               </HStack>
             </PopoverBody>
           </PopoverContent>

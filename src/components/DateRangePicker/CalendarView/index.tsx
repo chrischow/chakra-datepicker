@@ -1,3 +1,4 @@
+import { Heading, VStack } from '@chakra-ui/react'
 import { useDateRangePicker } from '../DateRangePickerContext'
 import { Mode } from '../types'
 import DayCalendar from './DayCalendar'
@@ -11,10 +12,13 @@ const CalendarView = ({ mode }: { mode: Mode }) => {
 
   return (
     <>
-      {calendarView === 'day' && <DayCalendar mode={mode} />}
-      {calendarView === 'month' && <MonthCalendar mode={mode} />}
-      {calendarView === 'year' && <YearCalendar mode={mode} />}
-      <Footer mode={mode} />
+      <VStack>
+        <Heading size="sm">{mode === 'start' ? 'Start' : 'End'} Date</Heading>
+        {calendarView === 'day' && <DayCalendar mode={mode} />}
+        {calendarView === 'month' && <MonthCalendar mode={mode} />}
+        {calendarView === 'year' && <YearCalendar mode={mode} />}
+        <Footer mode={mode} />
+      </VStack>
     </>
   )
 }
