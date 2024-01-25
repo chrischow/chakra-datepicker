@@ -40,6 +40,7 @@ const DateRangeInput = () => {
     // Customisation
     colorScheme,
     inputButtonProps,
+    inputContainerProps,
     inputProps,
     popoverComponentProps: {
       popoverTitle,
@@ -73,7 +74,16 @@ const DateRangeInput = () => {
     selectedStartDate && selectedEndDate ? selectedStartDate.getTime() > selectedEndDate.getTime() : false
 
   return (
-    <HStack alignItems="center" pr={2} gap={2} border="1px" borderColor="gray.200" bg="gray.200" borderRadius={6}>
+    <HStack
+      alignItems="center"
+      pr={2}
+      gap={2}
+      border="1px"
+      borderColor="gray.200"
+      bg="gray.200"
+      borderRadius={6}
+      {...inputContainerProps}
+    >
       <Input
         textAlign="center"
         placeholder="dd/mm/yyyy"

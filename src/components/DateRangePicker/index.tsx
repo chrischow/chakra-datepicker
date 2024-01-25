@@ -1,13 +1,14 @@
 import {
-  InputProps,
+  ButtonProps,
   IconButtonProps,
-  PopoverProps,
-  PopoverHeaderProps,
-  PopoverCloseButtonProps,
-  PopoverContentProps,
+  InputProps,
   PopoverArrowProps,
   PopoverBodyProps,
-  ButtonProps,
+  PopoverCloseButtonProps,
+  PopoverContentProps,
+  PopoverHeaderProps,
+  PopoverProps,
+  StackProps,
 } from '@chakra-ui/react'
 import {
   DEFAULT_ALLOW_MANUAL_INPUT,
@@ -17,9 +18,8 @@ import {
 } from '../../common/constants'
 import DateRangeInput from './DateRangeInput'
 import { DateRangePickerProvider } from './DateRangePickerContext'
-import { CustomisationProps } from './types'
 
-export interface DatePickerProps extends CustomisationProps {
+export interface DatePickerProps {
   // Standard input props
   onChange: (dateRange: [Date | null, Date | null]) => void
   value?: [Date | null, Date | null]
@@ -30,6 +30,7 @@ export interface DatePickerProps extends CustomisationProps {
   calendarButtonProps?: ButtonProps
   colorScheme?: string & {}
   inputButtonProps?: Partial<IconButtonProps>
+  inputContainerProps?: StackProps
   inputProps?: InputProps
   footerGoToButtonProps?: ButtonProps
   footerTodayButtonProps?: ButtonProps
@@ -61,6 +62,7 @@ const DateRangePicker = ({
   footerTodayButtonProps,
   inputProps,
   inputButtonProps,
+  inputContainerProps,
   navBackButtonProps,
   navCenterButtonProps,
   navForwardButtonProps,
@@ -81,6 +83,7 @@ const DateRangePicker = ({
       calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
       colorScheme={colorScheme}
       inputButtonProps={inputButtonProps}
+      inputContainerProps={inputContainerProps}
       inputProps={inputProps}
       navProps={{ navBackButtonProps, navForwardButtonProps, navCenterButtonProps }}
       popoverComponentProps={{

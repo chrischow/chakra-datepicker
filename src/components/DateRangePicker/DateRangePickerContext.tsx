@@ -81,6 +81,7 @@ const DateRangePickerContext = createContext<DateRangePickerContextProps>({
   calendarProps: {},
   colorScheme: DEFAULT_COLOR_SCHEME,
   inputButtonProps: {},
+  inputContainerProps: {},
   inputProps: {},
   navProps: {},
   popoverComponentProps: {},
@@ -117,6 +118,7 @@ export const DateRangePickerProvider = ({
   calendarProps = {},
   colorScheme,
   inputButtonProps = {},
+  inputContainerProps = {},
   inputProps = {},
   navProps = {},
   popoverComponentProps = {},
@@ -125,18 +127,18 @@ export const DateRangePickerProvider = ({
   today.setHours(0, 0, 0, 0)
   const tomorrow = new Date()
   tomorrow.setHours(23, 59, 59, 999)
-  const initialStartDate = value ? value[0] ?? today : today
-  const initialEndDate = value ? value[0] ?? today : today
+  const initialStartDate = value ? value[0] : today
+  const initialEndDate = value ? value[0] : today
   const [startCalendarView, setStartCalendarView] = useState<CalendarView>('day')
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(initialStartDate)
-  const [displayStartDate, setDisplayStartDate] = useState<Date>(initialStartDate)
+  const [displayStartDate, setDisplayStartDate] = useState<Date>(initialStartDate ?? today)
   const [selectedStartDateString, setSelectedStartDateString] = useState<string>(
     value ? (value[0] ? format(value[0], 'dd/MM/yyyy') : '') : format(today, 'dd/MM/yyyy'),
   )
 
   const [endCalendarView, setEndCalendarView] = useState<CalendarView>('day')
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(initialEndDate)
-  const [displayEndDate, setDisplayEndDate] = useState<Date>(initialEndDate)
+  const [displayEndDate, setDisplayEndDate] = useState<Date>(initialEndDate ?? today)
   const [selectedEndDateString, setSelectedEndDateString] = useState<string>(
     value ? (value[1] ? format(value[1], 'dd/MM/yyyy') : '') : format(today, 'dd/MM/yyyy'),
   )
@@ -241,6 +243,7 @@ export const DateRangePickerProvider = ({
         calendarProps,
         colorScheme,
         inputButtonProps,
+        inputContainerProps,
         inputProps,
         navProps,
         popoverComponentProps,

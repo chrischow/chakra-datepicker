@@ -8,12 +8,24 @@ import {
   PopoverArrowProps,
   PopoverBodyProps,
   ButtonProps,
+  StackProps,
 } from '@chakra-ui/react'
 
 export interface CustomisationProps {
+  calendarProps: {
+    calendarButtonProps?: ButtonProps
+    footerTodayButtonProps?: ButtonProps
+    footerGoToButtonProps?: ButtonProps
+  }
   colorScheme?: string & {}
-  inputProps?: InputProps
   inputButtonProps?: Partial<IconButtonProps>
+  inputContainerProps?: StackProps
+  inputProps?: InputProps
+  navProps: {
+    navBackButtonProps?: Partial<IconButtonProps>
+    navForwardButtonProps?: Partial<IconButtonProps>
+    navCenterButtonProps?: ButtonProps
+  }
   popoverComponentProps: {
     popoverTitle?: string
     popoverProps?: PopoverProps
@@ -22,16 +34,6 @@ export interface CustomisationProps {
     popoverContentProps?: PopoverContentProps
     popoverArrowProps?: PopoverArrowProps
     popoverBodyProps?: PopoverBodyProps
-  }
-  navProps: {
-    navBackButtonProps?: Partial<IconButtonProps>
-    navForwardButtonProps?: Partial<IconButtonProps>
-    navCenterButtonProps?: ButtonProps
-  }
-  calendarProps: {
-    calendarButtonProps?: ButtonProps
-    footerTodayButtonProps?: ButtonProps
-    footerGoToButtonProps?: ButtonProps
   }
 }
 
