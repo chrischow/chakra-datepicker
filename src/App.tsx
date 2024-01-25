@@ -119,6 +119,7 @@ function App() {
                   width: '150px',
                   _placeholder: { color: 'gray.400' },
                   errorBorderColor: 'transparent',
+                  focusBorderColor: 'transparent',
                 }}
                 popoverContentProps={{
                   color: 'gray.100',
