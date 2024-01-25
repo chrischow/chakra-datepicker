@@ -70,3 +70,5 @@ export const DEFAULT_SINGLE_POPOVER_TITLE = 'Pick a date'
 export const DEFAULT_RANGE_POPOVER_TITLE = 'Pick a date range'
 export const DEFAULT_COLOR_SCHEME = 'purple'
 export const DEFAULT_VALID_YEARS = { start: 1900, end: 2100 }
+export const DEFAULT_GOTO_BUTTON_TEXT = 'Selected'
+export const DEFAULT_TODAY_BUTTON_TEXT = 'Today'

@@ -13,7 +13,9 @@ import {
 import {
   DEFAULT_ALLOW_MANUAL_INPUT,
   DEFAULT_COLOR_SCHEME,
+  DEFAULT_GOTO_BUTTON_TEXT,
   DEFAULT_RANGE_POPOVER_TITLE,
+  DEFAULT_TODAY_BUTTON_TEXT,
   DEFAULT_VALID_YEARS,
 } from '../../common/constants'
 import DateRangeInput from './DateRangeInput'
@@ -33,7 +35,9 @@ export interface DateRangePickerProps {
   inputContainerProps?: StackProps
   inputProps?: InputProps
   footerGoToButtonProps?: ButtonProps
+  footerGoToButtonText?: string
   footerTodayButtonProps?: ButtonProps
+  footerTodayButtonText?: string
   navBackButtonProps?: Partial<IconButtonProps>
   navCenterButtonProps?: ButtonProps
   navForwardButtonProps?: Partial<IconButtonProps>
@@ -59,7 +63,9 @@ const DateRangePicker = ({
   calendarButtonProps,
   colorScheme = DEFAULT_COLOR_SCHEME,
   footerGoToButtonProps,
+  footerGoToButtonText = DEFAULT_GOTO_BUTTON_TEXT,
   footerTodayButtonProps,
+  footerTodayButtonText = DEFAULT_TODAY_BUTTON_TEXT,
   inputProps,
   inputButtonProps,
   inputContainerProps,
@@ -80,7 +86,13 @@ const DateRangePicker = ({
       value={value}
       allowManualInput={allowManualInput}
       validYears={validYears}
-      calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
+      calendarProps={{
+        calendarButtonProps,
+        footerGoToButtonProps,
+        footerGoToButtonText,
+        footerTodayButtonProps,
+        footerTodayButtonText,
+      }}
       colorScheme={colorScheme}
       inputButtonProps={inputButtonProps}
       inputContainerProps={inputContainerProps}

@@ -22,8 +22,10 @@ export type CalendarView = 'day' | 'month' | 'year'
 interface CustomisationProps {
   calendarProps: {
     calendarButtonProps?: ButtonProps
-    footerTodayButtonProps?: ButtonProps
     footerGoToButtonProps?: ButtonProps
+    footerGoToButtonText?: string
+    footerTodayButtonProps?: ButtonProps
+    footerTodayButtonText?: string
   }
   colorScheme?: string & {}
   inputButtonProps?: Partial<IconButtonProps>

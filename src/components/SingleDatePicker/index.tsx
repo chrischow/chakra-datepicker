@@ -9,14 +9,16 @@ import {
   PopoverHeaderProps,
   PopoverProps,
 } from '@chakra-ui/react'
-import DateInput from './DateInput'
-import { DatePickerProvider } from './DatePickerContext'
 import {
   DEFAULT_ALLOW_MANUAL_INPUT,
   DEFAULT_COLOR_SCHEME,
+  DEFAULT_GOTO_BUTTON_TEXT,
   DEFAULT_SINGLE_POPOVER_TITLE,
+  DEFAULT_TODAY_BUTTON_TEXT,
   DEFAULT_VALID_YEARS,
 } from '../../common/constants'
+import DateInput from './DateInput'
+import { DatePickerProvider } from './DatePickerContext'
 
 export interface DatePickerProps {
   // Standard input props
@@ -31,7 +33,9 @@ export interface DatePickerProps {
   calendarButtonProps?: ButtonProps
   colorScheme?: string & {}
   footerGoToButtonProps?: ButtonProps
+  footerGoToButtonText?: string
   footerTodayButtonProps?: ButtonProps
+  footerTodayButtonText?: string
   inputButtonProps?: Partial<IconButtonProps>
   inputProps?: InputProps
   navBackButtonProps?: Partial<IconButtonProps>
@@ -57,7 +61,9 @@ const SingleDatePicker = ({
   calendarButtonProps,
   colorScheme = DEFAULT_COLOR_SCHEME,
   footerGoToButtonProps,
+  footerGoToButtonText = DEFAULT_GOTO_BUTTON_TEXT,
   footerTodayButtonProps,
+  footerTodayButtonText = DEFAULT_TODAY_BUTTON_TEXT,
   inputButtonProps,
   inputProps,
   navBackButtonProps,
@@ -77,7 +83,13 @@ const SingleDatePicker = ({
       value={value}
       allowManualInput={allowManualInput}
       validYears={validYears}
-      calendarProps={{ calendarButtonProps, footerTodayButtonProps, footerGoToButtonProps }}
+      calendarProps={{
+        calendarButtonProps,
+        footerGoToButtonProps,
+        footerGoToButtonText,
+        footerTodayButtonProps,
+        footerTodayButtonText,
+      }}
       colorScheme={colorScheme}
       inputButtonProps={inputButtonProps}
       inputProps={inputProps}

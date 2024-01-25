@@ -1,4 +1,4 @@
-import { Button, VStack } from '@chakra-ui/react'
+import { Button, HStack } from '@chakra-ui/react'
 import { useDateRangePicker } from '../DateRangePickerContext'
 import { Mode } from '../types'
 
@@ -12,7 +12,7 @@ const Footer = ({ mode }: { mode: Mode }) => {
     setDisplayEndDate,
     resetToToday,
     colorScheme,
-    calendarProps: { footerTodayButtonProps, footerGoToButtonProps },
+    calendarProps: { footerGoToButtonProps, footerGoToButtonText, footerTodayButtonProps, footerTodayButtonText },
   } = useDateRangePicker()
 
   const isStart = mode === 'start'
@@ -21,7 +21,7 @@ const Footer = ({ mode }: { mode: Mode }) => {
   const setCalendarView = isStart ? setStartCalendarView : setEndCalendarView
 
   return (
-    <VStack mt={4} gap={4} alignItems="center">
+    <HStack mt={3} mb={3} width="100%" justifyContent="space-around" alignItems="center">
       <Button
         size="sm"
         variant="link"
@@ -29,7 +29,7 @@ const Footer = ({ mode }: { mode: Mode }) => {
         {...footerTodayButtonProps}
         onClick={() => resetToToday(mode)}
       >
-        Select today's date
+        {footerTodayButtonText}
       </Button>
       <Button
         size="sm"
@@ -43,9 +43,9 @@ const Footer = ({ mode }: { mode: Mode }) => {
           setCalendarView('day')
         }}
       >
-        Go to selected date
+        {footerGoToButtonText}
       </Button>
-    </VStack>
+    </HStack>
   )
 }
 

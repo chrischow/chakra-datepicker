@@ -1,4 +1,4 @@
-import { Button, VStack } from '@chakra-ui/react'
+import { Button, HStack } from '@chakra-ui/react'
 import { useDatePicker } from './DatePickerContext'
 
 const Footer = () => {
@@ -8,13 +8,13 @@ const Footer = () => {
     setDisplayDate,
     resetToToday,
     colorScheme,
-    calendarProps: { footerTodayButtonProps, footerGoToButtonProps },
+    calendarProps: { footerGoToButtonProps, footerGoToButtonText, footerTodayButtonProps, footerTodayButtonText },
   } = useDatePicker()
 
   return (
-    <VStack mt={4} gap={4} alignItems="center">
+    <HStack mt={3} mb={3} width="100%" justifyContent="space-around" alignItems="center">
       <Button size="sm" variant="link" colorScheme={colorScheme} {...footerTodayButtonProps} onClick={resetToToday}>
-        Select today's date
+        {footerTodayButtonText}
       </Button>
       <Button
         size="sm"
@@ -28,9 +28,9 @@ const Footer = () => {
           setCalendarView('day')
         }}
       >
-        Go to selected date
+        {footerGoToButtonText}
       </Button>
-    </VStack>
+    </HStack>
   )
 }
 
