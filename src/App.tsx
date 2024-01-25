@@ -1,4 +1,4 @@
-import { Box, Button, ChakraProvider, HStack, Heading, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, ChakraProvider, DarkMode, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi'
 import { IoCalendarNumberOutline } from 'react-icons/io5'
@@ -10,6 +10,7 @@ function App() {
 
   const [date1, setDate1] = useState<Date | null>(null)
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([new Date(), new Date()])
+  const [dateRange1, setDateRange1] = useState<[Date | null, Date | null]>([null, null])
 
   useEffect(() => {
     console.log('[DEMO] Selected new date:', date)
@@ -93,13 +94,30 @@ function App() {
 
         <VStack mt={8} alignItems="start">
           <Heading size="lg">Default DateRangePicker</Heading>
-          <DateRangePicker
-            value={dateRange}
-            onChange={setDateRange}
-            popoverComponentProps={{}}
-            navProps={{}}
-            calendarProps={{}}
-          />
+          <DateRangePicker value={dateRange} onChange={setDateRange} />
+        </VStack>
+
+        <VStack mt={8} alignItems="start">
+          <Heading size="lg">Dark mode DateRangePicker</Heading>
+          <Box bg="gray.800" p={4}>
+            <DarkMode>
+              <DateRangePicker
+                value={dateRange1}
+                onChange={setDateRange1}
+                inputContainerProps={{ bg: 'gray.700', borderColor: 'gray.200', borderRadius: 0, color: 'white' }}
+                inputProps={{
+                  bg: 'none',
+                  borderWidth: 0,
+                  width: '150px',
+                  _placeholder: { color: 'gray.300' },
+                  errorBorderColor: 'transparent',
+                }}
+                popoverContentProps={{
+                  color: 'gray.100',
+                }}
+              />
+            </DarkMode>
+          </Box>
         </VStack>
       </Box>
     </ChakraProvider>
