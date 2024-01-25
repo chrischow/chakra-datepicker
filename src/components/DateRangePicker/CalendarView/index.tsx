@@ -1,6 +1,7 @@
 import { useDateRangePicker } from '../DateRangePickerContext'
 import { Mode } from '../types'
 import DayCalendar from './DayCalendar'
+import Footer from './Footer'
 import MonthCalendar from './MonthCalendar'
 import YearCalendar from './YearCalendar'
 
@@ -13,6 +14,7 @@ const CalendarView = ({ mode }: { mode: Mode }) => {
       {calendarView === 'day' && <DayCalendar mode={mode} />}
       {calendarView === 'month' && <MonthCalendar mode={mode} />}
       {calendarView === 'year' && <YearCalendar mode={mode} />}
+      <Footer mode={mode} />
     </>
   )
 }

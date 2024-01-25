@@ -36,7 +36,7 @@ export interface DateRangePickerContextProps extends CustomisationProps {
   // Utilities
   getDatesInMonth: (date: Date) => Date[]
   isValidDate: (dateString: string) => boolean
-  resetToToday: () => void
+  resetToToday: (mode: Mode) => void
   resetView: (mode: Mode) => void
 
   // Behaviour
@@ -190,11 +190,18 @@ export const DateRangePickerProvider = ({
     onChange([selectedStartDate, selectedEndDate])
   }, [selectedStartDate, selectedEndDate])
 
-  const resetToToday = () => {
-    setSelectedStartDate(today)
-    setSelectedStartDateString(format(today, 'dd/MM/yyyy'))
-    setDisplayStartDate(today)
-    setStartCalendarView('day')
+  const resetToToday = (mode: Mode) => {
+    if (mode === 'start') {
+      setSelectedStartDate(today)
+      setSelectedStartDateString(format(today, 'dd/MM/yyyy'))
+      setDisplayStartDate(today)
+      setStartCalendarView('day')
+    } else {
+      setSelectedEndDate(today)
+      setSelectedEndDateString(format(today, 'dd/MM/yyyy'))
+      setDisplayEndDate(today)
+      setEndCalendarView('day')
+    }
   }
 
   const resetView = (mode: Mode) => {
