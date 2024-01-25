@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import {
   DEFAULT_ALLOW_MANUAL_INPUT,
+  DEFAULT_CLEAR_BUTTON_TEXT,
   DEFAULT_COLOR_SCHEME,
   DEFAULT_GOTO_BUTTON_TEXT,
   DEFAULT_SINGLE_POPOVER_TITLE,
@@ -32,6 +33,8 @@ export interface DatePickerProps {
   // Customisation
   calendarButtonProps?: ButtonProps
   colorScheme?: string & {}
+  footerClearButtonProps?: ButtonProps
+  footerClearButtonText?: string
   footerGoToButtonProps?: ButtonProps
   footerGoToButtonText?: string
   footerTodayButtonProps?: ButtonProps
@@ -60,6 +63,8 @@ const SingleDatePicker = ({
   // Customisation
   calendarButtonProps,
   colorScheme = DEFAULT_COLOR_SCHEME,
+  footerClearButtonProps,
+  footerClearButtonText = DEFAULT_CLEAR_BUTTON_TEXT,
   footerGoToButtonProps,
   footerGoToButtonText = DEFAULT_GOTO_BUTTON_TEXT,
   footerTodayButtonProps,
@@ -85,6 +90,8 @@ const SingleDatePicker = ({
       validYears={validYears}
       calendarProps={{
         calendarButtonProps,
+        footerClearButtonProps,
+        footerClearButtonText,
         footerGoToButtonProps,
         footerGoToButtonText,
         footerTodayButtonProps,

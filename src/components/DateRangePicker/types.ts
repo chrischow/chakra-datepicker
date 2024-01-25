@@ -15,6 +15,8 @@ export interface CustomisationProps {
   calendarProps: {
     calendarButtonProps?: ButtonProps
     footerTodayButtonProps?: ButtonProps
+    footerClearButtonText?: string
+    footerClearButtonProps?: ButtonProps
     footerGoToButtonText?: string
     footerGoToButtonProps?: ButtonProps
     footerTodayButtonText?: string

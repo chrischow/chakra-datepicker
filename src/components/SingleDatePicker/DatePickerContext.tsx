@@ -22,6 +22,8 @@ export type CalendarView = 'day' | 'month' | 'year'
 interface CustomisationProps {
   calendarProps: {
     calendarButtonProps?: ButtonProps
+    footerClearButtonProps?: ButtonProps
+    footerClearButtonText?: string
     footerGoToButtonProps?: ButtonProps
     footerGoToButtonText?: string
     footerTodayButtonProps?: ButtonProps
@@ -60,8 +62,9 @@ export interface DatePickerContextProps extends CustomisationProps {
   displayDate: Date
   setDisplayDate: Dispatch<SetStateAction<Date>>
   // Utilities
-  isValidDate: (dateString: string) => boolean
+  clearDate: () => void
   getDatesInMonth: (date: Date) => Date[]
+  isValidDate: (dateString: string) => boolean
   resetToToday: () => void
   resetView: () => void
   // Behaviour
@@ -85,8 +88,9 @@ const DatePickerContext = createContext<DatePickerContextProps>({
   displayDate: starterDate,
   setDisplayDate: () => {},
   // Utilities
-  isValidDate: () => true,
+  clearDate: () => {},
   getDatesInMonth: () => [],
+  isValidDate: () => true,
   resetToToday: () => {},
   resetView: () => {},
   // Customisation
@@ -183,6 +187,13 @@ export const DatePickerProvider = ({
     setCalendarView('day')
   }
 
+  const clearDate = () => {
+    setDisplayDate(now)
+    setSelectedDate(null)
+    setSelectedDateString('')
+    setCalendarView('day')
+  }
+
   const isValidDate = (dateString: string) => {
     return isValidDateInRange(dateString, validYears.start, validYears.end)
   }
@@ -190,6 +201,11 @@ export const DatePickerProvider = ({
   return (
     <DatePickerContext.Provider
       value={{
+        // Config
+        allowManualInput,
+        validYears,
+
+        // State
         calendarView,
         setCalendarView,
         selectedDate,
@@ -198,12 +214,15 @@ export const DatePickerProvider = ({
         setSelectedDateString,
         displayDate,
         setDisplayDate,
+
+        // Utilities
+        clearDate,
         getDatesInMonth,
+        isValidDate,
         resetToToday,
         resetView,
-        validYears,
-        allowManualInput,
-        isValidDate,
+
+        // Customisation
         colorScheme,
         inputProps,
         inputButtonProps,

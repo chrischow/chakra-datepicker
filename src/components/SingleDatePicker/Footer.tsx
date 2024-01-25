@@ -7,8 +7,16 @@ const Footer = () => {
     selectedDate,
     setDisplayDate,
     resetToToday,
+    clearDate,
     colorScheme,
-    calendarProps: { footerGoToButtonProps, footerGoToButtonText, footerTodayButtonProps, footerTodayButtonText },
+    calendarProps: {
+      footerClearButtonProps,
+      footerClearButtonText,
+      footerGoToButtonProps,
+      footerGoToButtonText,
+      footerTodayButtonProps,
+      footerTodayButtonText,
+    },
   } = useDatePicker()
 
   return (
@@ -29,6 +37,9 @@ const Footer = () => {
         }}
       >
         {footerGoToButtonText}
+      </Button>
+      <Button size="sm" variant="link" colorScheme="red" {...footerClearButtonProps} onClick={clearDate}>
+        {footerClearButtonText}
       </Button>
     </HStack>
   )

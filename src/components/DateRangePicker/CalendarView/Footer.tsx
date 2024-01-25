@@ -10,9 +10,17 @@ const Footer = ({ mode }: { mode: Mode }) => {
     setEndCalendarView,
     selectedEndDate,
     setDisplayEndDate,
+    clearDate,
     resetToToday,
     colorScheme,
-    calendarProps: { footerGoToButtonProps, footerGoToButtonText, footerTodayButtonProps, footerTodayButtonText },
+    calendarProps: {
+      footerClearButtonProps,
+      footerClearButtonText,
+      footerGoToButtonProps,
+      footerGoToButtonText,
+      footerTodayButtonProps,
+      footerTodayButtonText,
+    },
   } = useDateRangePicker()
 
   const isStart = mode === 'start'
@@ -44,6 +52,9 @@ const Footer = ({ mode }: { mode: Mode }) => {
         }}
       >
         {footerGoToButtonText}
+      </Button>
+      <Button size="sm" variant="link" colorScheme="red" {...footerClearButtonProps} onClick={() => clearDate(mode)}>
+        {footerClearButtonText}
       </Button>
     </HStack>
   )
